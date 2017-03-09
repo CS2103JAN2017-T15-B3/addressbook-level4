@@ -13,7 +13,7 @@ We are a team based in the [School of Computing, National University of Singapor
 #### [KENNY NG JIAN LIANG](http://github.com/kennyngdsc)
 <img src="images/kennyngdsc.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: CODE QUALITY IC
+Responsibilities: Code Quality IC
 
 -----
 
