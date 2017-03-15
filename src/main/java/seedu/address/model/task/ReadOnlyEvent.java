@@ -1,7 +1,5 @@
 package seedu.address.model.task;
 
-import seedu.address.model.tag.UniqueTagList;
-
 /**
  * A read-only immutable interface for an Event in the TaskManager.
  * Implementations should guarantee: details are present and not null, field values are validated.
