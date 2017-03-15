@@ -30,11 +30,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.FloatingTask;
+import seedu.address.model.task.ReadOnlyFloatingTask;
 import seedu.address.storage.XmlSerializableAddressBook;
 
 /**
@@ -49,7 +49,7 @@ public class TestUtil {
      */
     public static final String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Person[] SAMPLE_PERSON_DATA = getSamplePersonData();
+    public static final FloatingTask[] SAMPLE_PERSON_DATA = getSamplePersonData();
 
     public static final Tag[] SAMPLE_TAG_DATA = getSampleTagData();
 
@@ -68,19 +68,19 @@ public class TestUtil {
                 String.format("Expected %s to be thrown, but nothing was thrown.", expected.getName()));
     }
 
-    private static Person[] getSamplePersonData() {
+    private static FloatingTask[] getSamplePersonData() {
         try {
             //CHECKSTYLE.OFF: LineLength
-            return new Person[]{
-                new Person(new Name("Ali Muster"), new UniqueTagList()),
-                new Person(new Name("Boris Mueller"), new UniqueTagList()),
-                new Person(new Name("Carl Kurz"), new UniqueTagList()),
-                new Person(new Name("Daniel Meier"), new UniqueTagList()),
-                new Person(new Name("Elle Meyer"), new UniqueTagList()),
-                new Person(new Name("Fiona Kunz"), new UniqueTagList()),
-                new Person(new Name("George Best"), new UniqueTagList()),
-                new Person(new Name("Hoon Meier"), new UniqueTagList()),
-                new Person(new Name("Ida Mueller"), new UniqueTagList())
+            return new FloatingTask[]{
+                new FloatingTask(new Name("Ali Muster"), new UniqueTagList()),
+                new FloatingTask(new Name("Boris Mueller"), new UniqueTagList()),
+                new FloatingTask(new Name("Carl Kurz"), new UniqueTagList()),
+                new FloatingTask(new Name("Daniel Meier"), new UniqueTagList()),
+                new FloatingTask(new Name("Elle Meyer"), new UniqueTagList()),
+                new FloatingTask(new Name("Fiona Kunz"), new UniqueTagList()),
+                new FloatingTask(new Name("George Best"), new UniqueTagList()),
+                new FloatingTask(new Name("Hoon Meier"), new UniqueTagList()),
+                new FloatingTask(new Name("Ida Mueller"), new UniqueTagList())
             };
             //CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
@@ -104,7 +104,7 @@ public class TestUtil {
         }
     }
 
-    public static List<Person> generateSamplePersonData() {
+    public static List<FloatingTask> generateSamplePersonData() {
         return Arrays.asList(SAMPLE_PERSON_DATA);
     }
 
@@ -330,7 +330,7 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyPerson person) {
+    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyFloatingTask person) {
         return card.isSamePerson(person);
     }
 
