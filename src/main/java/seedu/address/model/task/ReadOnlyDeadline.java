@@ -4,7 +4,7 @@ package seedu.address.model.task;
  * A read-only immutable interface for a Deadline in the TaskManager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyDeadline extends ReadOnlyTask {
+public interface ReadOnlyDeadline extends ReadOnlyFloatingTask {
 	
 	TaskDate getEndDate();
 

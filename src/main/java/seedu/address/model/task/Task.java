@@ -4,7 +4,7 @@ package seedu.address.model.task;
  * Represents a task. It can be a floating task, an event or a deadline.
  */
 
-public abstract class Task {
+public abstract class Task implements ReadOnlyTask {
 	
 	protected Name name;
 	protected TaskDate startDate;
