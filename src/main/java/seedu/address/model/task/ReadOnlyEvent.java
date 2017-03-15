@@ -1,16 +1,12 @@
 package seedu.address.model.task;
 
-import seedu.address.model.tag.UniqueTagList;
-
 /**
  * A read-only immutable interface for an Event in the TaskManager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyEvent extends ReadOnlyTask {
+public interface ReadOnlyEvent extends ReadOnlyDeadline {
 	
 	TaskDate getStartDate();
-	
-	TaskDate getEndDate();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
