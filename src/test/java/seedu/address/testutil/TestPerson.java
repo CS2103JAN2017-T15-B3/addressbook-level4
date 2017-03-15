@@ -1,13 +1,13 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.Name;
-import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.ReadOnlyFloatingTask;
 
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyPerson {
+public class TestPerson implements ReadOnlyFloatingTask {
 
     private Name name;
     private UniqueTagList tags;

@@ -1,15 +1,16 @@
-package seedu.address.model.person;
+package seedu.address.model.task;
 
 import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Task;
 
 /**
- * Represents a Person in the address book.
+ * Represents a FloatingTask in the TaskManager.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Person implements ReadOnlyPerson {
+public class FloatingTask extends Task implements ReadOnlyFloatingTask{
 
     private Name name;
 
@@ -18,27 +19,40 @@ public class Person implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, UniqueTagList tags) {
+    public FloatingTask(Name name, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
     /**
-     * Creates a copy of the given ReadOnlyPerson.
+     * Creates a copy of the given ReadOnlyFloatingTask.
      */
-    public Person(ReadOnlyPerson source) {
+    public FloatingTask(ReadOnlyFloatingTask source) {
         this(source.getName(), source.getTags());
     }
 
+    @Override
+    public Name getName() {
+        return name;
+    }
+    
+    @Override
     public void setName(Name name) {
         assert name != null;
         this.name = name;
     }
 
     @Override
-    public Name getName() {
-        return name;
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ReadOnlyFloatingTask // instanceof handles nulls
+                && this.isSameStateAs((ReadOnlyFloatingTask) other));
+    }
+    
+    @Override
+    public String toString() {
+        return getAsText();
     }
 
     @Override
@@ -56,7 +70,7 @@ public class Person implements ReadOnlyPerson {
     /**
      * Updates this person with the details of {@code replacement}.
      */
-    public void resetData(ReadOnlyPerson replacement) {
+    public void resetData(ReadOnlyFloatingTask replacement) {
         assert replacement != null;
 
         this.setName(replacement.getName());
@@ -64,21 +78,8 @@ public class Person implements ReadOnlyPerson {
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ReadOnlyPerson // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyPerson) other));
-    }
-
-    @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, tags);
     }
-
-    @Override
-    public String toString() {
-        return getAsText();
-    }
-
 }
