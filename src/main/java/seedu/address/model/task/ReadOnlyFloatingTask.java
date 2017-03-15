@@ -1,5 +1,9 @@
 package seedu.address.model.task;
 
+import java.util.List;
+import java.util.Map;
+
+import seedu.address.logic.parser.ArgumentTokenizer.Prefix;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -14,7 +18,7 @@ public interface ReadOnlyFloatingTask {
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the person's internal tags.
      */
-    UniqueTagList getTags();
+    public Map<Prefix, List<String>> getTags();
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -33,7 +37,7 @@ public interface ReadOnlyFloatingTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append(" Tags: ");
-        getTags().forEach(builder::append);
+        builder.append(getTags().toString());
         return builder.toString();
     }
 
