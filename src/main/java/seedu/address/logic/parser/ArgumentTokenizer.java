@@ -23,7 +23,9 @@ public class ArgumentTokenizer {
 
     /** Arguments found after tokenizing **/
     private final Map<Prefix, List<String>> tokenizedArguments = new HashMap<>();
-
+    public Map<Prefix, List<String>> getMap() {
+        return tokenizedArguments;
+    }
     /**
      * Creates an ArgumentTokenizer that can tokenize arguments string as described by prefixes
      */
@@ -168,7 +170,7 @@ public class ArgumentTokenizer {
     public static class Prefix {
         final String prefix;
 
-        Prefix(String prefix) {
+        public Prefix(String prefix) {
             this.prefix = prefix;
         }
 

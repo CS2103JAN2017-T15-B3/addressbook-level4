@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ArgumentTokenizer.Prefix;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.FloatingTask;
@@ -75,7 +77,7 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElseGet(personToEdit::getName);
-        UniqueTagList updatedTags = editPersonDescriptor.getTags().orElseGet(personToEdit::getTags);
+        Map<Prefix, List<String>> updatedTags = null ; //editPersonDescriptor.getTags();
 
         return new FloatingTask(updatedName, updatedTags);
     }

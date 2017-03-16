@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.logic.parser.ArgumentTokenizer.Prefix;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.FloatingTask;
@@ -71,7 +72,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         } catch (UniqueTagList.DuplicateTagException e) {
             assert false : "AddressBooks should not have duplicate tags";
         }
-        syncMasterTagListWith(persons);
+        //syncMasterTagListWith(persons);
     }
 
 //// person-level operations
@@ -84,7 +85,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @throws UniquePersonList.DuplicatePersonException if an equivalent person already exists.
      */
     public void addPerson(FloatingTask p) throws UniquePersonList.DuplicatePersonException {
-        syncMasterTagListWith(p);
+        //syncMasterTagListWith(p);
         persons.add(p);
     }
 
@@ -102,7 +103,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         assert editedReadOnlyPerson != null;
 
         FloatingTask editedPerson = new FloatingTask(editedReadOnlyPerson);
-        syncMasterTagListWith(editedPerson);
+//        syncMasterTagListWith(editedPerson);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
@@ -114,20 +115,20 @@ public class AddressBook implements ReadOnlyAddressBook {
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      */
-    private void syncMasterTagListWith(FloatingTask person) {
-        final UniqueTagList personTags = person.getTags();
-        tags.mergeFrom(personTags);
-
-        // Create map with values = tag object references in the master list
-        // used for checking person tag references
-        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        tags.forEach(tag -> masterTagObjects.put(tag, tag));
-
-        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
-        final Set<Tag> correctTagReferences = new HashSet<>();
-        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
-        person.setTags(new UniqueTagList(correctTagReferences));
-    }
+//    private void syncMasterTagListWith(FloatingTask person) {
+//        final Map<Prefix, List<String>> personTags = person.getTags();
+//        tags.mergeFrom(personTags);
+//
+//        // Create map with values = tag object references in the master list
+//        // used for checking person tag references
+//        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
+//        tags.forEach(tag -> masterTagObjects.put(tag, tag));
+//
+//        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
+//        final Set<Tag> correctTagReferences = new HashSet<>();
+//        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+//        person.setTags(new UniqueTagList(correctTagReferences));
+//    }
 
     /**
      * Ensures that every tag in these persons:
@@ -135,9 +136,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      *  - points to a Tag object in the master list
      *  @see #syncMasterTagListWith(FloatingTask)
      */
-    private void syncMasterTagListWith(UniquePersonList persons) {
-        persons.forEach(this::syncMasterTagListWith);
-    }
+//    private void syncMasterTagListWith(UniquePersonList persons) {
+//        persons.forEach(this::syncMasterTagListWith);
+//    }
 
     public boolean removePerson(ReadOnlyFloatingTask key) throws UniquePersonList.PersonNotFoundException {
         if (persons.remove(key)) {

@@ -24,8 +24,8 @@ public class XmlAdaptedTag {
      *
      * @param source future changes to this will not affect the created
      */
-    public XmlAdaptedTag(Tag source) {
-        tagName = source.tagName;
+    public XmlAdaptedTag(String source) {
+        tagName = source;
     }
 
     /**
