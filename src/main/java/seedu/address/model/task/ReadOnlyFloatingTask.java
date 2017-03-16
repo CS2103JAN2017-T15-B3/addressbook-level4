@@ -5,11 +5,11 @@ import java.util.Map;
 
 import seedu.address.logic.parser.ArgumentTokenizer.Prefix;
 import seedu.address.model.tag.UniqueTagList;
-
 /**
  * A read-only immutable interface for a FloatingTask in the TaskManager.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
+
 public interface ReadOnlyFloatingTask {
 
     Name getName();
@@ -19,6 +19,7 @@ public interface ReadOnlyFloatingTask {
      * changes on the returned list will not affect the person's internal tags.
      */
     public Map<Prefix, List<String>> getTags();
+
 
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -40,5 +41,4 @@ public interface ReadOnlyFloatingTask {
         builder.append(getTags().toString());
         return builder.toString();
     }
-
 }
