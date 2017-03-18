@@ -10,6 +10,8 @@ import seedu.address.logic.parser.ArgumentTokenizer.Prefix;
 public class CliSyntax {
 
     /* Prefix definitions */
+    public static final Prefix PREFIX_STARTDATE = new Prefix("s/");
+    public static final Prefix PREFIX_ENDDATE = new Prefix("e/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
     /* Patterns definitions */

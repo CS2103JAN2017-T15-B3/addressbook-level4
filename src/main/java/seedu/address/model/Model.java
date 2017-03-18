@@ -41,6 +41,8 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered person list to filter by the given keywords*/
-    void updateFilteredPersonList(Set<String> keywords);
+    void updateFilteredTaskListByTaskName(Set<String> keywords);
 
+    /** Updates the filter of the filtered person list to filter by the given task type*/
+    void updateFilteredTaskListByTaskType(String taskType);
 }

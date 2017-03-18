@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -19,7 +21,9 @@ import seedu.address.model.tag.UniqueTagList;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser {
-
+	
+	public static final String EMPTY_STRING = "";
+	
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
@@ -27,8 +31,9 @@ public class EditCommandParser {
     public Command parse(String args) {
         assert args != null;
         ArgumentTokenizer argsTokenizer =
-                new ArgumentTokenizer(PREFIX_TAG);
+                new ArgumentTokenizer(PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_TAG);
         argsTokenizer.tokenize(args);
+    	
         List<Optional<String>> preambleFields = ParserUtil.splitPreamble(argsTokenizer.getPreamble().orElse(""), 2);
 
         Optional<Integer> index = preambleFields.get(0).flatMap(ParserUtil::parseIndex);
@@ -38,7 +43,12 @@ public class EditCommandParser {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         try {
+            Optional<String> startDateString = argsTokenizer.getValue(PREFIX_STARTDATE);
+        	Optional<String> endDateString = argsTokenizer.getValue(PREFIX_ENDDATE);
+        	
             editPersonDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
+            editPersonDescriptor.setStartDate(ParserUtil.parseTaskDate(startDateString));
+            editPersonDescriptor.setEndDate(ParserUtil.parseTaskDate(endDateString));
             editPersonDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());

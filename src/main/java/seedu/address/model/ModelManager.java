@@ -10,13 +10,16 @@ import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.parser.DateTimeUtil;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.TaskUtil;
+import seedu.address.model.person.TaskDate;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.UniquePersonList.PersonNotFoundException;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the task manager data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
@@ -94,10 +97,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredPersonList(Set<String> keywords) {
+    public void updateFilteredTaskListByTaskName(Set<String> keywords) {
         updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
+    public void updateFilteredTaskListByTaskType(String taskType) {
+    	updateFilteredPersonList(new PredicateExpression(new TypeQualifier(taskType)));
+    }
+    
     private void updateFilteredPersonList(Expression expression) {
         filteredPersons.setPredicate(expression::satisfies);
     }
@@ -154,4 +161,27 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    private class TypeQualifier implements Qualifier {
+    	private String taskType;
+    	
+    	TypeQualifier(String taskType) {
+    		this.taskType = taskType;
+    	}
+    	
+    	@Override
+    	public boolean run(ReadOnlyPerson task) {
+    		switch (taskType) {
+    			case "floating":
+    				return TaskUtil.isFloating(task);
+    			case "deadline":
+    				return TaskUtil.isDeadline(task);
+    			case "event":
+    				return TaskUtil.isEvent(task);
+    			// for parsing date
+    			default:
+    				TaskDate date = new TaskDate(DateTimeUtil.parseDateTime(taskType));
+    				return task.getStartDate().equals(date) || task.getEndDate().equals(date);
+    		}
+    	}
+    }
 }

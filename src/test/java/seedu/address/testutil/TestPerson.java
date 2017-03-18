@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.person.Name;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.TaskDate;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -52,5 +53,17 @@ public class TestPerson implements ReadOnlyPerson {
         sb.append("add " + this.getName().fullName + " ");
         this.getTags().asObservableList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public TaskDate getStartDate() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public TaskDate getEndDate() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
