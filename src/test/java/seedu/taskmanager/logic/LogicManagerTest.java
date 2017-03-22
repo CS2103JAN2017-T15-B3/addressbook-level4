@@ -368,8 +368,15 @@ public class LogicManagerTest {
             return new Task(name,startDate,endDate, tags);
         }
 
+        Task homework() throws Exception {
+            Name name = new Name("CS homewok");
+            Tag tag1 = new Tag("tag1");
+            Tag tag2 = new Tag("longertag2");
+            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            return new Task(name, tags);
+        }
         /**
-         * Generates a valid task using the given seed.
+         * Generates a valid floating task using the given seed.
          * Running this function with the same parameter values guarantees the returned task will have the same state.
          * Each unique seed will generate a unique Task object.
          *
