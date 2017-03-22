@@ -119,6 +119,6 @@ public class EditCommandTest extends TaskManagerGuiTest {
         // confirm the list now contains all previous tasks plus the task with updated details
         expectedTasksList[taskManagerIndex - 1] = editedTask;
         assertTrue(taskListPanel.isListMatching(expectedTasksList));
-        assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask));
+        assertResultMessage(String.format(EditCommand.MESSAGE_SUCCESS, editedTask));
     }
 }
