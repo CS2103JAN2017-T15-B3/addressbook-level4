@@ -13,8 +13,8 @@ import java.util.Optional;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.logic.commands.Command;
 import seedu.taskmanager.logic.commands.EditCommand;
-import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.model.tag.UniqueTagList;
 
 /**
@@ -42,7 +42,7 @@ public class EditCommandParser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
-        
+
         try {
             Optional<String> startDateString = argsTokenizer.getValue(PREFIX_STARTDATE);
         	Optional<String> endDateString = argsTokenizer.getValue(PREFIX_ENDDATE);

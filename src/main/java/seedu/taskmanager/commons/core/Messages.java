@@ -11,4 +11,3 @@ public class Messages {
     public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d tasks listed!";
     public static final String MESSAGE_START_AFTER_END = "The start date provided is after end date.";
 }
-;
