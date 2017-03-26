@@ -90,6 +90,21 @@ public class LogicEditCommandTest extends LogicManagerTest {
     }
 
     @Test
+    public void execute_edit_startAfterEndDate() throws Exception {
+        // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task task = helper.meeting();
+
+        // setup starting state
+        model.addTask(task); // task already in internal task manager
+
+        // execute command and verify result
+        String expectedMessage = Messages.MESSAGE_START_AFTER_END;
+        String invalidCommand = "edit 1 e/1/1/2017";
+        assertCommandFailure(invalidCommand, expectedMessage);
+    }
+
+    @Test
     public void execute_edit_validName() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task task1 = helper.generateTaskWithName("potato");

@@ -33,6 +33,7 @@ import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
+import seedu.taskmanager.model.task.DummyStartTaskDate;
 import seedu.taskmanager.model.task.Name;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
@@ -338,15 +339,28 @@ public class LogicManagerTest {
          * dummy values.
          */
         Task generateTaskWithName(String name) throws Exception {
-            return new Task(new Name(name), new UniqueTagList(new Tag("tag")));
+            return new Task(new Name(name),
+            				new UniqueTagList(new Tag("tag")));
+        }
+
+        /**
+         * Generates a Task object with given name and due date.
+         */
+        Task generateTaskWithDueDate(String name, String dueDate) throws Exception {
+            return new Task(new Name(name),
+            		new TaskDate(DateTimeUtil.parseDateTime(DummyStartTaskDate.DUMMY_START_DATE_STRING)),
+                    new TaskDate(DateTimeUtil.parseDateTime(dueDate)),
+                    new UniqueTagList(new Tag("tag")));
         }
 
         /**
          * Generates a Task object with given name, start and end dates.
          */
         Task generateTaskWithAll(String name, String startDate, String endDate) throws Exception {
-            return new Task(new Name(name), new TaskDate(DateTimeUtil.parseDateTime(startDate)),
-                    new TaskDate(DateTimeUtil.parseDateTime(endDate)), new UniqueTagList(new Tag("tag")));
+            return new Task(new Name(name),
+            		new TaskDate(DateTimeUtil.parseDateTime(startDate)),
+                    new TaskDate(DateTimeUtil.parseDateTime(endDate)),
+                    new UniqueTagList(new Tag("tag")));
         }
     }
 }

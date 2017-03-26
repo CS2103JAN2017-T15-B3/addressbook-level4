@@ -56,7 +56,13 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered task list to filter by the given task
-     * type
+     * type or date
      */
-    void updateFilteredTaskListByTaskType(String taskType);
+    void updateFilteredTaskListByTaskTypeOrDate(String taskType);
+
+    /**
+     * Updates the filter of the filtered task list to filter by the given task
+     * type and date
+     */
+    void updateFilteredTaskListByTaskTypeAndDate(String[] taskTypeAndDate);
 }

@@ -104,8 +104,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskListByTaskType(String taskType) {
+    public void updateFilteredTaskListByTaskTypeOrDate(String taskType) {
         updateFilteredTaskList(new PredicateExpression(new TypeQualifier(taskType)));
+    }
+
+    @Override
+    public void updateFilteredTaskListByTaskTypeAndDate(String[] taskTypeAndDate) {
+        updateFilteredTaskList(new PredicateExpression(new TypeAndDateQualifier(taskTypeAndDate)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -195,6 +200,40 @@ public class ModelManager extends ComponentManager implements Model {
                     // Deliberately empty as taskType will not throw exception
                     return false;
                 }
+            }
+        }
+    }
+
+    private class TypeAndDateQualifier implements Qualifier {
+        private String taskType;
+        private TaskDate date;
+
+        TypeAndDateQualifier(String[] taskTypeAndDate) {
+            taskType = taskTypeAndDate[0];
+
+            try {
+            	date = new TaskDate(DateTimeUtil.parseDateTime(taskTypeAndDate[1]));
+            } catch (IllegalValueException ive) {
+            	// Deliberately empty as this date will not throw exception
+            }
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+
+        	boolean dateFilter = task.getStartDate().getOnlyDate().equals(date.getOnlyDate())
+                    || task.getEndDate().getOnlyDate().equals(date.getOnlyDate());
+
+            switch (taskType) {
+            case "floating":
+                return TaskUtil.isFloating(task) && dateFilter;
+            case "deadline":
+                return TaskUtil.isDeadline(task) && dateFilter;
+            case "event":
+                return TaskUtil.isEvent(task) && dateFilter;
+            default:
+            	// will never reach this step
+                return false;
             }
         }
     }

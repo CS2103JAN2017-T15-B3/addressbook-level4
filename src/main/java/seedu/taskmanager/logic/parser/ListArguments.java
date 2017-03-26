@@ -26,5 +26,11 @@ public class ListArguments {
         } catch (IllegalValueException ive) {
             isDate = false;
         }
+
+//        if (!arg.equals(FLOATING_TASK_STRING) ||
+//        		!arg.equals(DEADLINE_STRING) ||
+//        		!arg.equals(EVENT_STRING)) {
+//        	isDate = false;
+//        }
     }
 }

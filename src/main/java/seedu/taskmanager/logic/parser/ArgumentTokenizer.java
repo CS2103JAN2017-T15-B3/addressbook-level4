@@ -174,6 +174,17 @@ public class ArgumentTokenizer {
     }
 
     /**
+     * Changes the value of the given prefix in the state of this tokenizer
+     */
+    public void changeArgument(Prefix prefix, String value) {
+    	this.tokenizedArguments.remove(prefix);
+
+    	List<String> values = new ArrayList<>();
+        values.add(value);
+        this.tokenizedArguments.put(prefix, values);
+    }
+
+    /**
      * A prefix that marks the beginning of an argument. e.g. '/t' in 'add James
      * /t friend'
      */

@@ -16,20 +16,32 @@ public class ListCommand extends Command {
 
     private static final String EMPTY_STRING = "";
 
-    private String taskType;
+    private String taskType = null;
+    private String[] taskTypeAndDate;
 
     public ListCommand(String taskType) {
         this.taskType = taskType;
     }
 
+    public ListCommand(String[] taskTypeAndDate) {
+    	this.taskTypeAndDate = taskTypeAndDate;
+    }
+
     @Override
     public CommandResult execute() {
         assert model != null;
-        if (taskType.equals(EMPTY_STRING)) {
-            model.updateFilteredListToShowAll();
-            return new CommandResult(MESSAGE_SUCCESS);
+
+        if (taskType != null) {
+        	if (taskType.equals(EMPTY_STRING)) {
+                model.updateFilteredListToShowAll();
+                return new CommandResult(MESSAGE_SUCCESS);
+            }
+            model.updateFilteredTaskListByTaskTypeOrDate(taskType);
+            return new CommandResult(MESSAGE_SUCCESS + " (" + taskType + ")");
         }
-        model.updateFilteredTaskListByTaskType(taskType);
-        return new CommandResult(MESSAGE_SUCCESS + " (" + taskType + ")");
+
+        model.updateFilteredTaskListByTaskTypeAndDate(taskTypeAndDate);
+        return new CommandResult(MESSAGE_SUCCESS + " (" + taskTypeAndDate[0] + ", " +
+        							taskTypeAndDate[1] + ")");
     }
 }

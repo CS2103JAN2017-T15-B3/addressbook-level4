@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.taskmanager.commons.core.Messages;
+import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.model.tag.UniqueTagList;
@@ -29,6 +30,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager.";
+    public static final String MESSAGE_START_AFTER_END = "The start date provided is after end date.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -58,12 +60,14 @@ public class EditCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(filteredTaskListIndex);
-        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
         try {
+        	Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
             model.updateTask(filteredTaskListIndex, editedTask);
         } catch (UniqueTaskList.DuplicateTaskException dpe) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        } catch (IllegalValueException ive) {
+        	throw new CommandException(MESSAGE_START_AFTER_END);
         }
         model.updateFilteredListToShowAll();
 
@@ -74,13 +78,17 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+    private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor) throws IllegalValueException {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         TaskDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
         TaskDate updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToEdit::getEndDate);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
+
+        if (!updatedStartDate.getTaskDate().before(updatedEndDate.getTaskDate())) {
+        	throw new IllegalValueException(MESSAGE_START_AFTER_END);
+        }
 
         return new Task(updatedName, updatedStartDate, updatedEndDate, updatedTags);
     }

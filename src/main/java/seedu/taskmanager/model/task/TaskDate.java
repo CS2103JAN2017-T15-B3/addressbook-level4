@@ -1,5 +1,6 @@
 package seedu.taskmanager.model.task;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import seedu.taskmanager.logic.parser.DateTimeUtil;
@@ -21,8 +22,14 @@ public class TaskDate {
     }
 
     public String getOnlyDate() {
-        String[] dateAndTime = this.toString().split(",");
-        return dateAndTime[0];
+    	Calendar c = Calendar.getInstance();
+    	c.setTime(taskDate);
+
+    	int day = c.get(Calendar.DAY_OF_MONTH);
+    	int month = c.get(Calendar.MONTH);
+    	int year = c.get(Calendar.YEAR);
+
+    	return Integer.toString(day) + Integer.toString(month) + Integer.toString(year);
     }
 
     @Override

@@ -23,6 +23,7 @@ import seedu.taskmanager.model.tag.UniqueTagList;
 public class EditCommandParser {
 
     public static final String EMPTY_STRING = "";
+    public static final String REMOVE_STRING = "remove";
 
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -40,6 +41,13 @@ public class EditCommandParser {
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+
+//        if (argsTokenizer.getValue(PREFIX_STARTDATE).isPresent()) {
+//        	if (argsTokenizer.getValue(PREFIX_STARTDATE).get() == REMOVE_STRING) {
+//            	argsTokenizer.changeArgument(PREFIX_STARTDATE, DummyStartTaskDate.DUMMY_START_DATE_STRING);
+//            }
+//        }
+
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
 
         try {
