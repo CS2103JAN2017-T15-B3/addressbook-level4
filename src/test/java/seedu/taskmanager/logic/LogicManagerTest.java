@@ -345,8 +345,8 @@ public class LogicManagerTest {
          * Generates a Task object with given name, start and end dates.
          */
         Task generateTaskWithAll(String name, String startDate, String endDate) throws Exception {
-            return new Task(new Name(name), new TaskDate(DateTimeUtil.parseDateTime(startDate)),
-                    new TaskDate(DateTimeUtil.parseDateTime(endDate)), new UniqueTagList(new Tag("tag")));
+            return new Task(new Name(name), new TaskDate(DateTimeUtil.parseStartDateTime(startDate)),
+                    new TaskDate(DateTimeUtil.parseEndDateTime(endDate)), new UniqueTagList(new Tag("tag")));
         }
     }
 }

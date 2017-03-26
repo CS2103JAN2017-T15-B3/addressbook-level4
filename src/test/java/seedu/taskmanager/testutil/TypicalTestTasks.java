@@ -43,28 +43,28 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             event1 = new TaskBuilder().withName(EVENT1_NAME)
-                    .withStartDate(new TaskDate(DateTimeUtil.parseDateTime(EVENT1_START_DATE_STRING)))
-                    .withEndDate(new TaskDate(DateTimeUtil.parseDateTime(EVENT1_END_DATE_STRING))).withTags("important")
+                    .withStartDate(new TaskDate(DateTimeUtil.parseStartDateTime(EVENT1_START_DATE_STRING)))
+                    .withEndDate(new TaskDate(DateTimeUtil.parseEndDateTime(EVENT1_END_DATE_STRING))).withTags("important")
                     .build();
             event2 = new TaskBuilder().withName(EVENT2_NAME)
-                    .withStartDate(new TaskDate(DateTimeUtil.parseDateTime(EVENT2_START_DATE_STRING)))
-                    .withEndDate(new TaskDate(DateTimeUtil.parseDateTime(EVENT2_END_DATE_STRING))).build();
+                    .withStartDate(new TaskDate(DateTimeUtil.parseStartDateTime(EVENT2_START_DATE_STRING)))
+                    .withEndDate(new TaskDate(DateTimeUtil.parseEndDateTime(EVENT2_END_DATE_STRING))).build();
 
             ddl1 = new TaskBuilder().withName(DDL1_NAME)
-                    .withEndDate(new TaskDate(DateTimeUtil.parseDateTime(DDL1_DUE_TIME_STRING))).withTags("urgent")
+                    .withEndDate(new TaskDate(DateTimeUtil.parseEndDateTime(DDL1_DUE_TIME_STRING))).withTags("urgent")
                     .withTags("dying").build();
             ddl2 = new TaskBuilder().withName(DDL2_NAME)
-                    .withEndDate(new TaskDate(DateTimeUtil.parseDateTime(DDL2_DUE_TIME_STRING))).build();
+                    .withEndDate(new TaskDate(DateTimeUtil.parseEndDateTime(DDL2_DUE_TIME_STRING))).build();
 
             flt1 = new TaskBuilder().withName(FLT1_NAME).withTags("essential").build();
             flt2 = new TaskBuilder().withName(FLT2_NAME).withTags("easy").build();
 
             // Manually add only
             event3 = new TaskBuilder().withName(EVENT3_NAME)
-                    .withStartDate(new TaskDate(DateTimeUtil.parseDateTime(EVENT3_START_DATE_STRING)))
-                    .withEndDate(new TaskDate(DateTimeUtil.parseDateTime(EVENT3_END_DATE_STRING))).build();
+                    .withStartDate(new TaskDate(DateTimeUtil.parseStartDateTime(EVENT3_START_DATE_STRING)))
+                    .withEndDate(new TaskDate(DateTimeUtil.parseEndDateTime(EVENT3_END_DATE_STRING))).build();
             ddl3 = new TaskBuilder().withName(DDL3_NAME)
-                    .withEndDate(new TaskDate(DateTimeUtil.parseDateTime(DDL3_DUE_TIME_STRING))).build();
+                    .withEndDate(new TaskDate(DateTimeUtil.parseEndDateTime(DDL3_DUE_TIME_STRING))).build();
             flt3 = new TaskBuilder().withName(FLT3_NAME).withTags("hard").withTags("daunting").build();
 
         } catch (IllegalValueException e) {

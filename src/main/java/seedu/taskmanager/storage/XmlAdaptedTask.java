@@ -67,8 +67,8 @@ public class XmlAdaptedTask {
             taskTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final TaskDate startDate = new TaskDate(DateTimeUtil.parseDateTime(this.startDate));
-        final TaskDate endDate = new TaskDate(DateTimeUtil.parseDateTime(this.endDate));
+        final TaskDate startDate = new TaskDate(DateTimeUtil.parseStartDateTime(this.startDate));
+        final TaskDate endDate = new TaskDate(DateTimeUtil.parseEndDateTime(this.endDate));
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(name, startDate, endDate, tags);
     }
