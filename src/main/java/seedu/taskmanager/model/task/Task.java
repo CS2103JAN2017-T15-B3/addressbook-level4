@@ -3,7 +3,6 @@ package seedu.taskmanager.model.task;
 import java.util.Objects;
 import java.util.Optional;
 
-import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.model.tag.UniqueTagList;
 
@@ -14,7 +13,7 @@ import seedu.taskmanager.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private TaskDate startDate, endDate;
+    private Optional<TaskDate> startDate, endDate;
     private UniqueTagList tags;
     private boolean isDone;
 
@@ -22,25 +21,27 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
 
-    public Task(Name name, TaskDate startDate, TaskDate endDate, UniqueTagList tags) {
+    public Task(Name name, Optional<TaskDate> startDate, Optional<TaskDate> endDate, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = Optional.ofNullable(startDate);
+        this.endDate = Optional.ofNullable(endDate);
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
+
     }
 
     public Task(Name name, UniqueTagList tags) throws IllegalValueException {
         this.name = name;
-        this.startDate = new DummyStartTaskDate();
-        this.endDate = new DummyEndTaskDate();
+        this.startDate = Optional.empty();
+        this.endDate = Optional.empty();
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
         this.isDone = false;
     }
 
     /**
+
      * Creates task based on optional startDate and endDate
      *
      * @param name
@@ -51,16 +52,17 @@ public class Task implements ReadOnlyTask {
      */
     public Task(Name name, Optional<TaskDate> startDate, Optional<TaskDate> endDate, UniqueTagList tags)
             throws IllegalValueException {
-        this(name, startDate.orElse(new DummyStartTaskDate()), endDate.orElse(new DummyEndTaskDate()), tags);
+        this(name, startDate.orElse(null), endDate.orElse(null), tags);
     }
 
     /**
+
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
         this.name = source.getName();
-        this.startDate = source.getStartDate();
-        this.endDate = source.getEndDate();
+        this.startDate = Optional.of(source.getStartDate());
+        this.endDate = Optional.of(source.getEndDate());
         this.tags = source.getTags();
     }
 
@@ -75,21 +77,65 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
+
     public TaskDate getStartDate() {
-        return startDate;
+        assert startDate.isPresent();
+        return startDate.get();
     }
 
     @Override
     public TaskDate getEndDate() {
-        return endDate;
+        assert endDate.isPresent();
+        return endDate.get();
     }
 
     public void setStartDate(TaskDate taskDate) {
-        this.startDate = taskDate;
+        assert taskDate != null;
+        this.startDate = Optional.of(taskDate);
     }
 
     public void setEndDate(TaskDate taskDate) {
-        this.endDate = taskDate;
+        assert taskDate != null;
+        this.endDate = Optional.of(taskDate);
+    }
+
+    public void removeStartDate() {
+        this.startDate = Optional.empty();
+    }
+
+    public void removeEndDate() {
+        this.startDate = Optional.empty();
+    }
+
+    @Override
+    public boolean hasStartDate() {
+        return startDate.isPresent();
+    }
+
+    @Override
+    public boolean hasEndDate() {
+        return endDate.isPresent();
+    }
+
+    @Override
+    public boolean isFloating() {
+        return !hasStartDate() && !hasEndDate();
+    }
+
+    @Override
+    public boolean isDeadline() {
+        return !hasStartDate() && hasEndDate();
+    }
+
+    @Override
+    public boolean isEvent() {
+        return hasStartDate() && hasEndDate();
+    }
+
+    public boolean isValidTask() {
+        return isFloating() || isDeadline()
+                || (isEvent() && startDate.get().getTaskDate().before(endDate.get().getTaskDate()));
+
     }
 
     @Override

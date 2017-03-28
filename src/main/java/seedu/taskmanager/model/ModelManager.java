@@ -16,7 +16,6 @@ import seedu.taskmanager.logic.parser.DateTimeUtil;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.TaskDate;
-import seedu.taskmanager.model.task.TaskUtil;
 import seedu.taskmanager.model.task.UniqueTaskList;
 import seedu.taskmanager.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -190,17 +189,19 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             switch (taskType) {
             case "floating":
-                return TaskUtil.isFloating(task);
+                return task.isFloating();
             case "deadline":
-                return TaskUtil.isDeadline(task);
+                return task.isDeadline();
             case "event":
-                return TaskUtil.isEvent(task);
+                return task.isEvent();
             // for parsing date
             default:
                 try {
                     TaskDate date = new TaskDate(DateTimeUtil.parseDateTime(taskType));
-                    return task.getStartDate().getOnlyDate().equals(date.getOnlyDate())
-                            || task.getEndDate().getOnlyDate().equals(date.getOnlyDate());
+                    return (task.getStartDate().isPresent() &&
+                    		task.getStartDate().get().getOnlyDate().equals(date.getOnlyDate())) ||
+                    		(task.getEndDate().isPresent() &&
+                    		task.getEndDate().get().getOnlyDate().equals(date.getOnlyDate()));
 
                 } catch (IllegalValueException ive) {
                     // Deliberately empty as taskType will not throw exception
@@ -218,27 +219,30 @@ public class ModelManager extends ComponentManager implements Model {
             taskType = taskTypeAndDate[0];
 
             try {
-            	date = new TaskDate(DateTimeUtil.parseDateTime(taskTypeAndDate[1]));
+                date = new TaskDate(DateTimeUtil.parseDateTime(taskTypeAndDate[1]));
             } catch (IllegalValueException ive) {
-            	// Deliberately empty as this date will not throw exception
+                // Deliberately empty as this date will not throw exception
             }
         }
 
         @Override
         public boolean run(ReadOnlyTask task) {
 
-        	boolean dateFilter = task.getStartDate().getOnlyDate().equals(date.getOnlyDate())
-                    || task.getEndDate().getOnlyDate().equals(date.getOnlyDate());
+        	boolean dateFilter = (task.getStartDate().isPresent() &&
+        			task.getStartDate().get().getOnlyDate().equals(date.getOnlyDate())) ||
+        			(task.getEndDate().isPresent() &&
+        					task.getEndDate().get().getOnlyDate().equals(date.getOnlyDate()));
+
 
             switch (taskType) {
             case "floating":
-                return TaskUtil.isFloating(task) && dateFilter;
+                return task.isFloating() && dateFilter;
             case "deadline":
-                return TaskUtil.isDeadline(task) && dateFilter;
+                return task.isDeadline() && dateFilter;
             case "event":
-                return TaskUtil.isEvent(task) && dateFilter;
+                return task.isEvent() && dateFilter;
             default:
-            	// will never reach this step
+                // will never reach this step
                 return false;
             }
         }

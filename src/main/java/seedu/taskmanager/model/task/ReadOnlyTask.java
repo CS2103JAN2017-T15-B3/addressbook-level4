@@ -1,5 +1,7 @@
 package seedu.taskmanager.model.task;
 
+import java.util.Optional;
+
 import seedu.taskmanager.model.tag.UniqueTagList;
 
 /**
@@ -11,11 +13,21 @@ public interface ReadOnlyTask {
 
     Name getName();
 
-    TaskDate getStartDate();
+    Optional<TaskDate> getStartDate();
 
-    TaskDate getEndDate();
+    Optional<TaskDate> getEndDate();
+
+    boolean hasStartDate();
+
+    boolean hasEndDate();
 
     boolean isDone();
+
+    boolean isFloating();
+
+    boolean isDeadline();
+
+    boolean isEvent();
 
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
@@ -45,5 +57,4 @@ public interface ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
 }

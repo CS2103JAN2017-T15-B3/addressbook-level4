@@ -4,6 +4,7 @@ import static seedu.taskmanager.logic.parser.AddCommandParser.NO_END_DATE;
 import static seedu.taskmanager.logic.parser.AddCommandParser.NO_START_DATE;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
@@ -11,8 +12,6 @@ import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.logic.parser.DateTimeUtil;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
-import seedu.taskmanager.model.task.DummyEndTaskDate;
-import seedu.taskmanager.model.task.DummyStartTaskDate;
 import seedu.taskmanager.model.task.Name;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.TaskDate;
@@ -44,27 +43,23 @@ public class AddCommand extends Command {
             throws IllegalValueException {
 
         final Set<Tag> tagSet = new HashSet<>();
-        TaskDate startDate;
-        TaskDate endDate;
 
-        if (startDateString == NO_START_DATE) {
+        TaskDate startDate = null;
+        TaskDate endDate = null;
 
-            startDate = new DummyStartTaskDate();
-
-        } else {
-            startDate = new TaskDate(DateTimeUtil.parseStartDateTime(startDateString));
+        if (startDateString != NO_START_DATE) {
+            startDate = new TaskDate(DateTimeUtil.parseDateTime(startDateString));
         }
 
-        if (endDateString == NO_END_DATE) {
-            endDate = new DummyEndTaskDate();
+        if (endDateString != NO_END_DATE) {
+            endDate = new TaskDate(DateTimeUtil.parseDateTime(endDateString));
 
-        } else {
-            endDate = new TaskDate(DateTimeUtil.parseEndDateTime(endDateString));
         }
 
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
+
         this.toAdd = new Task(new Name(name), startDate, endDate, new UniqueTagList(tagSet));
     }
 

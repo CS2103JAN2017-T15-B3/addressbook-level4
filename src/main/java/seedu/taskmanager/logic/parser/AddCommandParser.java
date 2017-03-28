@@ -41,7 +41,6 @@ public class AddCommandParser {
             String endDate = getEndDateFromArgsTokenizer(argsTokenizer);
             Set<String> tags = getTagsFromArgsTokenizer(argsTokenizer);
             return new AddCommand(name, startDate, endDate, tags);
-
         } catch (NoSuchElementException nsee) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         } catch (IllegalValueException ive) {
@@ -54,27 +53,22 @@ public class AddCommandParser {
         if (name == EMPTY_STRING) {
             throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-
         return name;
     }
 
     private String getStartDateFromArgsTokenizer(ArgumentTokenizer argsTokenizer) throws IllegalValueException {
         if (argsTokenizer.getValue(PREFIX_STARTDATE).isPresent()) {
-            if (argsTokenizer.getValue(PREFIX_ENDDATE).isPresent()) {
-                if (isValidStartAndEndDate(argsTokenizer)) {
+        	if (argsTokenizer.getValue(PREFIX_ENDDATE).isPresent()) {
+        		if (isValidStartAndEndDate(argsTokenizer)) {
                     return argsTokenizer.getValue(PREFIX_STARTDATE).get();
-
                 } else {
                     throw new IllegalValueException(String.format(MESSAGE_START_AFTER_END, AddCommand.MESSAGE_USAGE));
                 }
-
             } else {
                 throw new IllegalValueException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
-
         }
-
         return NO_START_DATE;
     }
 

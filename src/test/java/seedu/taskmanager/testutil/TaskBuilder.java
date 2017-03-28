@@ -1,5 +1,7 @@
 package seedu.taskmanager.testutil;
 
+import java.util.Optional;
+
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
@@ -29,12 +31,12 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder withStartDate(TaskDate startDate) {
+    public TaskBuilder withStartDate(Optional<TaskDate> startDate) {
         this.task.setStartDate(startDate);
         return this;
     }
 
-    public TaskBuilder withEndDate(TaskDate endDate) {
+    public TaskBuilder withEndDate(Optional<TaskDate> endDate) {
         this.task.setEndDate(endDate);
         return this;
     }
