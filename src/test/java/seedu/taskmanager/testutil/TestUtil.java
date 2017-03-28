@@ -8,6 +8,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
@@ -29,12 +30,14 @@ import seedu.taskmanager.TestApp;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.FileUtil;
 import seedu.taskmanager.commons.util.XmlUtil;
+import seedu.taskmanager.logic.parser.DateTimeUtil;
 import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Name;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
+import seedu.taskmanager.model.task.TaskDate;
 import seedu.taskmanager.storage.XmlSerializableTaskManager;
 
 /**
@@ -71,15 +74,9 @@ public class TestUtil {
     private static Task[] getSampleTaskData() {
         try {
             // CHECKSTYLE.OFF: LineLength
-            return new Task[] { new Task(new Name("Ali Muster"), new UniqueTagList()),
-                    new Task(new Name("Boris Mueller"), new UniqueTagList()),
-                    new Task(new Name("Carl Kurz"), new UniqueTagList()),
-                    new Task(new Name("Daniel Meier"), new UniqueTagList()),
-                    new Task(new Name("Elle Meyer"), new UniqueTagList()),
-                    new Task(new Name("Fiona Kunz"), new UniqueTagList()),
-                    new Task(new Name("George Best"), new UniqueTagList()),
-                    new Task(new Name("Hoon Meier"), new UniqueTagList()),
-                    new Task(new Name("Ida Mueller"), new UniqueTagList()) };
+            return new Task[] { new Task(new Name("Meeting with boss"), Optional.empty(), Optional.of(new TaskDate(DateTimeUtil.parseEndDateTime("tmr"))), new UniqueTagList("impt")),
+            		new Task(new Name("Rest for the day"), Optional.empty(), Optional.empty(), new UniqueTagList("VERY IMPT")),
+            		new Task(new Name("Birthday party"), Optional.of(new TaskDate(DateTimeUtil.parseStartDateTime("14 june 2017 10pm"))), Optional.of(new TaskDate(DateTimeUtil.parseEndDateTime("14 june 2017 6pm"))), new UniqueTagList("impt")) };
             // CHECKSTYLE.ON: LineLength
         } catch (IllegalValueException e) {
             assert false;

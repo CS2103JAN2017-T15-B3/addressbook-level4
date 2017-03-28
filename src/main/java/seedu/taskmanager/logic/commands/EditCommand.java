@@ -1,5 +1,7 @@
 package seedu.taskmanager.logic.commands;
 
+import static seedu.taskmanager.logic.parser.EditCommandParser.EMPTY_STRING;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -82,13 +84,32 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
-        TaskDate updatedStartDate = editTaskDescriptor.getStartDate().orElseGet(taskToEdit::getStartDate);
-        TaskDate updatedEndDate = editTaskDescriptor.getEndDate().orElseGet(taskToEdit::getEndDate);
+
+        Optional<TaskDate> updatedStartDate = taskToEdit.getStartDate();
+        if (editTaskDescriptor.getStartDate().isPresent()) {
+        	updatedStartDate = editTaskDescriptor.getStartDate();
+
+        	if (editTaskDescriptor.getStartDate().get().equals(EMPTY_STRING)) {
+        		updatedStartDate = Optional.empty();
+        	}
+        }
+
+        Optional<TaskDate> updatedEndDate = taskToEdit.getEndDate();
+        if (editTaskDescriptor.getEndDate().isPresent()) {
+        	updatedEndDate = editTaskDescriptor.getEndDate();
+
+        	if (editTaskDescriptor.getEndDate().get().equals(EMPTY_STRING)) {
+        		updatedEndDate = Optional.empty();
+        	}
+        }
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
 
-        if (!updatedStartDate.getTaskDate().before(updatedEndDate.getTaskDate())) {
-        	throw new IllegalValueException(MESSAGE_START_AFTER_END);
+        if (updatedStartDate.isPresent() && updatedEndDate.isPresent()) {
+        	if (!updatedStartDate.get().getTaskDate().before(updatedEndDate.get().getTaskDate())) {
+            	throw new IllegalValueException(MESSAGE_START_AFTER_END);
+            }
         }
+
 
         return new Task(updatedName, updatedStartDate, updatedEndDate, updatedTags);
     }

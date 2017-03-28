@@ -1,5 +1,7 @@
 package seedu.taskmanager.model.task;
 
+import java.util.Optional;
+
 import seedu.taskmanager.model.tag.UniqueTagList;
 
 /**
@@ -11,9 +13,9 @@ public interface ReadOnlyTask {
 
     Name getName();
 
-    TaskDate getStartDate();
+    Optional<TaskDate> getStartDate();
 
-    TaskDate getEndDate();
+    Optional<TaskDate> getEndDate();
 
     boolean isDone();
 

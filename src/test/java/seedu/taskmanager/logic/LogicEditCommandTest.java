@@ -10,7 +10,6 @@ import seedu.taskmanager.commons.core.Messages;
 import seedu.taskmanager.logic.commands.EditCommand;
 import seedu.taskmanager.logic.parser.DateTimeUtil;
 import seedu.taskmanager.model.TaskManager;
-import seedu.taskmanager.model.task.DummyStartTaskDate;
 import seedu.taskmanager.model.task.Task;
 
 public class LogicEditCommandTest extends LogicManagerTest {
@@ -141,7 +140,7 @@ public class LogicEditCommandTest extends LogicManagerTest {
     public void execute_edit_validEndDate() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task task = helper.generateTaskWithName("potato");
-        Task editedTask = helper.generateTaskWithAll("potato", DummyStartTaskDate.DUMMY_START_DATE_STRING, "now");
+        Task editedTask = helper.generateTaskWithDueDate("potato", "now");
 
         List<Task> sampleTasks = helper.generateTaskList(task);
         TaskManager expectedTM = helper.generateTaskManager(sampleTasks);

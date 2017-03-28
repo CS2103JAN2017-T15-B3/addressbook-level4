@@ -3,7 +3,6 @@ package seedu.taskmanager.model.task;
 import java.util.Objects;
 import java.util.Optional;
 
-import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.model.tag.UniqueTagList;
 
@@ -14,7 +13,7 @@ import seedu.taskmanager.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Name name;
-    private TaskDate startDate, endDate;
+    private Optional<TaskDate> startDate, endDate;
     private UniqueTagList tags;
     private boolean isDone;
 
@@ -22,36 +21,14 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
 
-    public Task(Name name, TaskDate startDate, TaskDate endDate, UniqueTagList tags) {
+    public Task(Name name, Optional<TaskDate> startDate, Optional<TaskDate> endDate, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
-    }
-
-    public Task(Name name, UniqueTagList tags) throws IllegalValueException {
-        this.name = name;
-        this.startDate = new DummyStartTaskDate();
-        this.endDate = new DummyEndTaskDate();
-        this.tags = new UniqueTagList(tags); // protect internal tags from
-                                             // changes in the arg list
         this.isDone = false;
-    }
-
-    /**
-     * Creates task based on optional startDate and endDate
-     *
-     * @param name
-     * @param startDate
-     * @param endDate
-     * @param tags
-     * @throws IllegalValueException
-     */
-    public Task(Name name, Optional<TaskDate> startDate, Optional<TaskDate> endDate, UniqueTagList tags)
-            throws IllegalValueException {
-        this(name, startDate.orElse(new DummyStartTaskDate()), endDate.orElse(new DummyEndTaskDate()), tags);
     }
 
     /**
@@ -75,20 +52,22 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public TaskDate getStartDate() {
+    public Optional<TaskDate> getStartDate() {
         return startDate;
     }
 
-    @Override
-    public TaskDate getEndDate() {
-        return endDate;
-    }
-
-    public void setStartDate(TaskDate taskDate) {
+    public void setStartDate(Optional<TaskDate> taskDate) {
+    	assert taskDate != null;
         this.startDate = taskDate;
     }
 
-    public void setEndDate(TaskDate taskDate) {
+    @Override
+    public Optional<TaskDate> getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Optional<TaskDate> taskDate) {
+    	assert taskDate != null;
         this.endDate = taskDate;
     }
 

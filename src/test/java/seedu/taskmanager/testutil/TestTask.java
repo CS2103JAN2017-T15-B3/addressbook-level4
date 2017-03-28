@@ -1,5 +1,7 @@
 package seedu.taskmanager.testutil;
 
+import java.util.Optional;
+
 import seedu.taskmanager.model.tag.UniqueTagList;
 import seedu.taskmanager.model.task.Name;
 import seedu.taskmanager.model.task.ReadOnlyTask;
@@ -11,8 +13,8 @@ import seedu.taskmanager.model.task.TaskDate;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private TaskDate startDate;
-    private TaskDate endDate;
+    private Optional<TaskDate> startDate;
+    private Optional<TaskDate> endDate;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -35,11 +37,11 @@ public class TestTask implements ReadOnlyTask {
         this.tags = tags;
     }
 
-    public void setStartDate(TaskDate startDate) {
+    public void setStartDate(Optional<TaskDate> startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(TaskDate endDate) {
+    public void setEndDate(Optional<TaskDate> endDate) {
         this.endDate = endDate;
     }
 
@@ -49,12 +51,12 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public TaskDate getStartDate() {
+    public Optional<TaskDate> getStartDate() {
         return startDate;
     }
 
     @Override
-    public TaskDate getEndDate() {
+    public Optional<TaskDate> getEndDate() {
         return endDate;
     }
 

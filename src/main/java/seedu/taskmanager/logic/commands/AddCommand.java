@@ -4,6 +4,7 @@ import static seedu.taskmanager.logic.parser.AddCommandParser.NO_END_DATE;
 import static seedu.taskmanager.logic.parser.AddCommandParser.NO_START_DATE;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
@@ -11,8 +12,6 @@ import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.logic.parser.DateTimeUtil;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
-import seedu.taskmanager.model.task.DummyEndTaskDate;
-import seedu.taskmanager.model.task.DummyStartTaskDate;
 import seedu.taskmanager.model.task.Name;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.TaskDate;
@@ -44,27 +43,21 @@ public class AddCommand extends Command {
             throws IllegalValueException {
 
         final Set<Tag> tagSet = new HashSet<>();
-        TaskDate startDate;
-        TaskDate endDate;
+        Optional<TaskDate> startDate = Optional.empty();
+        Optional<TaskDate> endDate = Optional.empty();
 
-        if (startDateString == NO_START_DATE) {
-
-            startDate = new DummyStartTaskDate();
-
-        } else {
-            startDate = new TaskDate(DateTimeUtil.parseStartDateTime(startDateString));
+        if (!startDateString.equals(NO_START_DATE)) {
+        	startDate = Optional.of(new TaskDate(DateTimeUtil.parseStartDateTime(startDateString)));
         }
 
-        if (endDateString == NO_END_DATE) {
-            endDate = new DummyEndTaskDate();
-
-        } else {
-            endDate = new TaskDate(DateTimeUtil.parseEndDateTime(endDateString));
+        if (!endDateString.equals(NO_END_DATE)) {
+            endDate = Optional.of(new TaskDate(DateTimeUtil.parseEndDateTime(endDateString)));
         }
 
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
+
         this.toAdd = new Task(new Name(name), startDate, endDate, new UniqueTagList(tagSet));
     }
 

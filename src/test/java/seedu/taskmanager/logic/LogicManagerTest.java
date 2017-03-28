@@ -10,6 +10,7 @@ import static seedu.taskmanager.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.After;
 import org.junit.Before;
@@ -33,7 +34,6 @@ import seedu.taskmanager.model.ReadOnlyTaskManager;
 import seedu.taskmanager.model.TaskManager;
 import seedu.taskmanager.model.tag.Tag;
 import seedu.taskmanager.model.tag.UniqueTagList;
-import seedu.taskmanager.model.task.DummyStartTaskDate;
 import seedu.taskmanager.model.task.Name;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
@@ -222,7 +222,7 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, startDate, endDate, tags);
+            return new Task(name, Optional.of(startDate), Optional.of(endDate), tags);
         }
 
         Task homework() throws Exception {
@@ -230,7 +230,7 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("longertag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, tags);
+            return new Task(name, Optional.empty(), Optional.empty(), tags);
         }
 
         /**
@@ -243,6 +243,8 @@ public class LogicManagerTest {
          */
         Task generateTask(int seed) throws Exception {
             return new Task(new Name("Task " + seed),
+            		Optional.empty(),
+            		Optional.empty(),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))));
         }
 
@@ -340,7 +342,9 @@ public class LogicManagerTest {
          */
         Task generateTaskWithName(String name) throws Exception {
             return new Task(new Name(name),
-            				new UniqueTagList(new Tag("tag")));
+            		Optional.empty(),
+            		Optional.empty(),
+            		new UniqueTagList(new Tag("tag")));
         }
 
         /**
@@ -348,8 +352,8 @@ public class LogicManagerTest {
          */
         Task generateTaskWithDueDate(String name, String dueDate) throws Exception {
             return new Task(new Name(name),
-            		new TaskDate(DateTimeUtil.parseDateTime(DummyStartTaskDate.DUMMY_START_DATE_STRING)),
-                    new TaskDate(DateTimeUtil.parseDateTime(dueDate)),
+            		Optional.empty(),
+            		Optional.of(new TaskDate(DateTimeUtil.parseDateTime(dueDate))),
                     new UniqueTagList(new Tag("tag")));
         }
 
@@ -358,8 +362,8 @@ public class LogicManagerTest {
          */
         Task generateTaskWithAll(String name, String startDate, String endDate) throws Exception {
             return new Task(new Name(name),
-            		new TaskDate(DateTimeUtil.parseDateTime(startDate)),
-                    new TaskDate(DateTimeUtil.parseDateTime(endDate)),
+            		Optional.of(new TaskDate(DateTimeUtil.parseDateTime(startDate))),
+            		Optional.of(new TaskDate(DateTimeUtil.parseDateTime(endDate))),
                     new UniqueTagList(new Tag("tag")));
 
         }

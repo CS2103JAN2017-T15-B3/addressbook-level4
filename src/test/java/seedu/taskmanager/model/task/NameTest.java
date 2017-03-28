@@ -15,12 +15,12 @@ public class NameTest {
         // as white spaces will be removed
 
         // valid name
-        assertTrue(Name.isValidName("peter jack")); // alphabets only
+        assertTrue(Name.isValidName("meeting coffee")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric
+        assertTrue(Name.isValidName("birthday the 2nd")); // alphanumeric
                                                        // characters
-        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long
+        assertTrue(Name.isValidName("Capital Markets")); // with capital letters
+        assertTrue(Name.isValidName("Meeting At USA Gordon Ramsay Restaurant")); // long
                                                                         // names
     }
 }
