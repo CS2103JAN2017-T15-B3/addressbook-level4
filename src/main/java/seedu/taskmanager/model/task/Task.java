@@ -24,20 +24,45 @@ public class Task implements ReadOnlyTask {
     public Task(Name name, Optional<TaskDate> startDate, Optional<TaskDate> endDate, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(name, tags);
         this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = Optional.ofNullable(startDate);
+        this.endDate = Optional.ofNullable(endDate);
+        this.tags = new UniqueTagList(tags); // protect internal tags from
+                                             // changes in the arg list
+
+    }
+
+    public Task(Name name, UniqueTagList tags) throws IllegalValueException {
+        this.name = name;
+        this.startDate = Optional.empty();
+        this.endDate = Optional.empty();
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
         this.isDone = false;
     }
 
     /**
+
+     * Creates task based on optional startDate and endDate
+     *
+     * @param name
+     * @param startDate
+     * @param endDate
+     * @param tags
+     * @throws IllegalValueException
+     */
+    public Task(Name name, Optional<TaskDate> startDate, Optional<TaskDate> endDate, UniqueTagList tags)
+            throws IllegalValueException {
+        this(name, startDate.orElse(null), endDate.orElse(null), tags);
+    }
+
+    /**
+
      * Creates a copy of the given ReadOnlyTask.
      */
     public Task(ReadOnlyTask source) {
         this.name = source.getName();
-        this.startDate = source.getStartDate();
-        this.endDate = source.getEndDate();
+        this.startDate = Optional.of(source.getStartDate());
+        this.endDate = Optional.of(source.getEndDate());
         this.tags = source.getTags();
     }
 
@@ -52,23 +77,65 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Optional<TaskDate> getStartDate() {
-        return startDate;
-    }
 
-    public void setStartDate(Optional<TaskDate> taskDate) {
-    	assert taskDate != null;
-        this.startDate = taskDate;
+    public TaskDate getStartDate() {
+        assert startDate.isPresent();
+        return startDate.get();
     }
 
     @Override
-    public Optional<TaskDate> getEndDate() {
-        return endDate;
+    public TaskDate getEndDate() {
+        assert endDate.isPresent();
+        return endDate.get();
     }
 
-    public void setEndDate(Optional<TaskDate> taskDate) {
-    	assert taskDate != null;
-        this.endDate = taskDate;
+    public void setStartDate(TaskDate taskDate) {
+        assert taskDate != null;
+        this.startDate = Optional.of(taskDate);
+    }
+
+    public void setEndDate(TaskDate taskDate) {
+        assert taskDate != null;
+        this.endDate = Optional.of(taskDate);
+    }
+
+    public void removeStartDate() {
+        this.startDate = Optional.empty();
+    }
+
+    public void removeEndDate() {
+        this.startDate = Optional.empty();
+    }
+
+    @Override
+    public boolean hasStartDate() {
+        return startDate.isPresent();
+    }
+
+    @Override
+    public boolean hasEndDate() {
+        return endDate.isPresent();
+    }
+
+    @Override
+    public boolean isFloating() {
+        return !hasStartDate() && !hasEndDate();
+    }
+
+    @Override
+    public boolean isDeadline() {
+        return !hasStartDate() && hasEndDate();
+    }
+
+    @Override
+    public boolean isEvent() {
+        return hasStartDate() && hasEndDate();
+    }
+
+    public boolean isValidTask() {
+        return isFloating() || isDeadline()
+                || (isEvent() && startDate.get().getTaskDate().before(endDate.get().getTaskDate()));
+
     }
 
     @Override

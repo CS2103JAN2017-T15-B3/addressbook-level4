@@ -16,7 +16,7 @@ import seedu.taskmanager.logic.commands.EditCommand;
 import seedu.taskmanager.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.model.tag.UniqueTagList;
-import seedu.taskmanager.model.task.TaskDate;
+
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -24,7 +24,7 @@ import seedu.taskmanager.model.task.TaskDate;
 public class EditCommandParser {
 
     public static final String EMPTY_STRING = "";
-    public static final String REMOVE_STRING = "remove";
+    public static final String REMOVE_STRING = "/remove";
 
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -42,9 +42,6 @@ public class EditCommandParser {
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
-
-        Optional<TaskDate> emptyStartDate = Optional.empty();
-        Optional<TaskDate> emptyEndDate = Optional.empty();
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
 
@@ -66,6 +63,22 @@ public class EditCommandParser {
                 }
             }
             editTaskDescriptor.setStartDate(emptyEndDate);
+
+
+            if (startDateString.isPresent() && startDateString.get().toLowerCase().equals(REMOVE_STRING)) {
+                editTaskDescriptor.setStartDateRemovedFlag();
+
+            } else {
+                editTaskDescriptor.setStartDate(ParserUtil.parseTaskDate(startDateString));
+            }
+
+            if (endDateString.isPresent() && endDateString.get().toLowerCase().equals(REMOVE_STRING)) {
+                editTaskDescriptor.setEndDateRemovedFlag();
+
+            } else {
+                editTaskDescriptor.setEndDate(ParserUtil.parseTaskDate(endDateString));
+            }
+            editTaskDescriptor.setName(ParserUtil.parseName(preambleFields.get(1)));
 
             editTaskDescriptor.setTags(parseTagsForEdit(ParserUtil.toSet(argsTokenizer.getAllValues(PREFIX_TAG))));
 

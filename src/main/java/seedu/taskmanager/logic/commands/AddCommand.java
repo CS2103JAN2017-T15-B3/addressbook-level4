@@ -43,15 +43,17 @@ public class AddCommand extends Command {
             throws IllegalValueException {
 
         final Set<Tag> tagSet = new HashSet<>();
-        Optional<TaskDate> startDate = Optional.empty();
-        Optional<TaskDate> endDate = Optional.empty();
 
-        if (!startDateString.equals(NO_START_DATE)) {
-        	startDate = Optional.of(new TaskDate(DateTimeUtil.parseStartDateTime(startDateString)));
+        TaskDate startDate = null;
+        TaskDate endDate = null;
+
+        if (startDateString != NO_START_DATE) {
+            startDate = new TaskDate(DateTimeUtil.parseDateTime(startDateString));
         }
 
-        if (!endDateString.equals(NO_END_DATE)) {
-            endDate = Optional.of(new TaskDate(DateTimeUtil.parseEndDateTime(endDateString)));
+        if (endDateString != NO_END_DATE) {
+            endDate = new TaskDate(DateTimeUtil.parseDateTime(endDateString));
+
         }
 
         for (String tagName : tags) {

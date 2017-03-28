@@ -11,7 +11,7 @@ import seedu.taskmanager.logic.parser.DateTimeUtil;
  */
 public class TaskDate {
 
-    public final Date taskDate;
+    private final Date taskDate;
 
     public TaskDate(Date date) {
         this.taskDate = date;
@@ -22,14 +22,14 @@ public class TaskDate {
     }
 
     public String getOnlyDate() {
-    	Calendar c = Calendar.getInstance();
-    	c.setTime(taskDate);
+        Calendar c = Calendar.getInstance();
+        c.setTime(taskDate);
 
-    	int day = c.get(Calendar.DAY_OF_MONTH);
-    	int month = c.get(Calendar.MONTH);
-    	int year = c.get(Calendar.YEAR);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
 
-    	return Integer.toString(day) + Integer.toString(month) + Integer.toString(year);
+        return Integer.toString(day) + Integer.toString(month) + Integer.toString(year);
     }
 
     @Override

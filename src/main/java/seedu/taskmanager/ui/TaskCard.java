@@ -7,7 +7,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.taskmanager.model.task.ReadOnlyTask;
-import seedu.taskmanager.model.task.TaskUtil;
 
 public class TaskCard extends UiPart<Region> {
 
@@ -69,20 +68,24 @@ public class TaskCard extends UiPart<Region> {
      * @param task
      */
     private void taskSelector(ReadOnlyTask task) {
-        if (TaskUtil.isFloating(task)) {
+        if (task.isFloating()) {
             deleteLabel(startDate);
             deleteLabel(endDate);
             taskType.setText("Floating");
 
-        } else if (TaskUtil.isDeadline(task)) {
+        } else if (task.isDeadline()) {
             deleteLabel(startDate);
             endDate.setText("Due: " + task.getEndDate().toString());
             taskType.setText("Deadline");
 
-        } else if (TaskUtil.isEvent(task)) {
+        } else if (task.isEvent()) {
             startDate.setText("Start: " + task.getStartDate().toString());
             endDate.setText("End: " + task.getEndDate().toString());
             taskType.setText("Event");
+        } else {
+            deleteLabel(startDate);
+            deleteLabel(endDate);
+            taskType.setText("Error");
         }
     }
 

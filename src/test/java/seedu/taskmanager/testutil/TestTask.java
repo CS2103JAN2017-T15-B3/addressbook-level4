@@ -37,12 +37,14 @@ public class TestTask implements ReadOnlyTask {
         this.tags = tags;
     }
 
-    public void setStartDate(Optional<TaskDate> startDate) {
-        this.startDate = startDate;
+
+    public void setStartDate(TaskDate startDate) {
+        this.startDate = Optional.of(startDate);
     }
 
-    public void setEndDate(Optional<TaskDate> endDate) {
-        this.endDate = endDate;
+    public void setEndDate(TaskDate endDate) {
+        this.endDate = Optional.of(endDate);
+
     }
 
     @Override
@@ -51,13 +53,15 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Optional<TaskDate> getStartDate() {
-        return startDate;
+
+    public TaskDate getStartDate() {
+        return startDate.get();
     }
 
     @Override
-    public Optional<TaskDate> getEndDate() {
-        return endDate;
+    public TaskDate getEndDate() {
+        return endDate.get();
+
     }
 
     @Override
@@ -83,4 +87,28 @@ public class TestTask implements ReadOnlyTask {
         return false;
     }
 
+    @Override
+    public boolean hasStartDate() {
+        return startDate.isPresent();
+    }
+
+    @Override
+    public boolean hasEndDate() {
+        return endDate.isPresent();
+    }
+
+    @Override
+    public boolean isFloating() {
+        return !hasStartDate() && !hasEndDate();
+    }
+
+    @Override
+    public boolean isDeadline() {
+        return !hasStartDate() && hasEndDate();
+    }
+
+    @Override
+    public boolean isEvent() {
+        return hasStartDate() && hasEndDate();
+    }
 }

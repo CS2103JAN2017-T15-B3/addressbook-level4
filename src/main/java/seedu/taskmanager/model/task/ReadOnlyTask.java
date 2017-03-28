@@ -17,7 +17,17 @@ public interface ReadOnlyTask {
 
     Optional<TaskDate> getEndDate();
 
+    boolean hasStartDate();
+
+    boolean hasEndDate();
+
     boolean isDone();
+
+    boolean isFloating();
+
+    boolean isDeadline();
+
+    boolean isEvent();
 
     /**
      * The returned TagList is a deep copy of the internal TagList, changes on
@@ -47,5 +57,4 @@ public interface ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
 }
