@@ -349,38 +349,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | have a help function | know how to use the program
-`* * *` | user | create deadlines | remind myself when this task have to be done
-`* * *` | user | create events | know of upcoming events
-`* * *` | user | create floating tasks | constantly remind myself to do things
-`* * *` | user | list all tasks | know what is happening
-`* * *` | user | list all deadlines | know which tasks are up on particular dates
-`* * *` | user | list all events | know what events are happening
-`* * *` | user | list all floating events | know what floating events are happening
-`* * *` | user | update an existing task | change a task
-`* * *` | user | update date of an existing task | change the the date in case of a change
-`* * *` | user | update task types | accurately reflect changes in the task
-`* * *` | user | delete a task | strike off a task that is over or cancelled
-`* * *` | user | undo a latest command | make amendments to my latest command
-`* * *` | user | search a task by date | find the corresponding tasks
-`* * *` | user | search a task by name | find the corresponding tasks
-`* * *` | user | change the save file directory | save in different files
-`* *` | user | exit the program | quit
-`* *` | user | clear all tasks | remove all tasks in one go
-`* *` | user | re-do the last undone command | undo my undo command
-`* *` | user | search a task by event name | find a particular event
-`* *` | user | search a floating task by name | find a particular floating task
-`* *` | user | set a reminder for an existing task | be aware of deadlines
-`* *` | user | add a recurring event | avoid having to add the same task repetitively
-`* *` | user | view all tasks today in a summarized format | quickly know my agenda
-`*` | user | switch between year/month/day view | navigate and plan my agendas
-`*` | user | export a PDF file of the task manager | have a copy of my tasks
-`*` | user | tag a location to an existing task | know where the task is at
-`*` | user | create a task with a location | know where the task is at
-`*` | user | search by location | know which tasks is held at this location
-`*` | user | update the location of a task | change the place in case the location changes
-`*` | user | write in a natural speech | use the program without any prior knowledge
-`*` | user | sync to Google calendar | use the program any time at any location
+`* * *` | new user | have a help function | familiarize myself with all the commands and learn how to use the task manager
+`* * *` | user | create deadlines | have a visual reminder and know when a particular task should be done and plan my schedule accordingly
+`* * *` | user | create events | know about upcoming events and plan my schedule accordingly
+`* * *` | user | create floating tasks | constantly remind myself to do things that I may, otherwise, not give attention to
+`* * *` | user | list all tasks | have a clear visualization of all the things to be done and prioritze accordingly
+`* * *` | user | list all deadlines | know which tasks need to be finished before a particular date/time
+`* * *` | user | list all events | know which events are happening when and plan accordingly
+`* * *` | user | list all floating events | know which floating events exist and plan accordingly
+`* * *` | user | update an existing task | change the name and/or start date and/or end date etc. of an event whose parameters may change with time.
+`* * *` | user | update date of an existing task | change the date in case of a change
+`* * *` | user | update task types | accurately reflect changes in the task type. For example, an event type task may become a deadline type task if it gets a due date in which case it is important for this change to be reflected in the task manager
+`* * *` | user | delete a task | remove a task from the task manager if it has been cancelled or is not important/required anymore
+`* * *` | user | undo a latest command | not execute my latest (previous) command in case I made a mistake or it is not required anymore
+`* * *` | user | search a task by date | find the corresponding tasks to know/get a visual of the tasks on a certain date. For example, I may have forgotten what the actual task is that is due on a date
+`* * *` | user | search a task by name | find the corresponding tasks. For example, I may have forgotten the details of task whose name I remember
+`* * *` | user | change the save file directory | save in different files which is important security/memory allocation
+`* *` | user | exit the program | quit the task manager as may not need it all the time
+`* *` | user | clear all tasks | remove all tasks in one go if it is needed as removing them one by one may take significant time 
+`* *` | user | re-do the last undone command | undo my undo command as I may have made a mistake undoing the latest undo command
+`* *` | user | search an event task by name | find a particular event task only as deadline and floating tasks may not be required
+`* *` | user | search a deadline task by name | find a particular deadline task only as event and floating tasks may not be required
+`* *` | user | search a floating task by name | find a particular floating task only as deadline and event tasks may not be required
+`* *` | user | add a recurring event | avoid having to add the same task repetitively; with its parameters automatically updated
+`* *` | user | view all tasks today | quickly know my agenda for today in order to plan my day 
+`*` | user | tag location to a task | know where the task is at if needed as I may need the task manager to remember this detail
+`*` | user | search by location | know which task/tasks is/are held at that location
+`*` | user | update location of a task | change the place in case the location of task changes
+
 
 ## Appendix B : Use Cases
 

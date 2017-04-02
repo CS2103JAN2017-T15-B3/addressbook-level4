@@ -153,19 +153,46 @@ Deletes a specified task.<br>
 
 This command will simply delete the task at index number 2 shown on the current list.
 
-### 2.7. Exiting the program : `exit`
+### 2.7. Undo a command : `undo`
+
+Undo the previous command executed. There is no limit to the number of undo actions that the task manager can execute.<br>
+**Format:** `undo` <br>
+**Example:** <br>
+> add meeting with professor <br>
+> undo <br>
+
+The first command will add the floating task 'meeting with professor'. The second command will remove the floating task 'meeting with professor' from the task manager therefore 'undoing' the previous command.
+
+### 2.8. Redo a command : `redo`
+
+Execute the command undone by the previous undo command. Redo will basically undo the previous 'undo' command. Redo can be executed as many times as the 'undo' command execute right before the start of 'redo' command. However, there is no limit to the number of redo actions that the task manager can execute since there is no limit to the number of undo actions.<br>
+**Format:** `redo` <br>
+**Example:** <br>
+> add meeting with professor <br>
+> undo <br>
+> redo <br>
+
+The first command will add the floating task 'meeting with professor'. The second command will remove the floating task 'meeting with professor' from the task manager therefore 'undoing' the previous command. The third command will add the floating task 'meeting with professor' again therefore 'undoing' the previous undo command.
+
+### 2.9. Marking tasks as done: `mark`
+
+Marks a particular task as either done or not done by changing the colour (RED for undone, GREEN for done) displayed next to the task in the task manager. <br>
+**Format:** `mark <INDEX> <done/undone>` <br>
+**Format:** <br>
+> mark 4 done <br>
+
+This command will dislay a green colour next to the task at index number 4 indicating that the particular task has been done.
+
+### 2.10. Exiting the program : `exit`
 
 Exits the program.<br>
 **Format:** `exit` <br>
 
-### 2.8. Saving the data
+### 2.11. Saving the data
 Task manager data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-### 2.9. Marking tasks as done: `mark`
 
-Marks a particular task as either done or not done<br>
-**Format:** `mark <INDEX> <done/undone>` <br>
 
 ## 3. FAQ
 
@@ -205,8 +232,14 @@ Marks a particular task as either done or not done<br>
 * **Help** : `help` <br>
   e.g. `help`
 
-* **Exit** : 'exit' <br>
-   e.g. `exit`
+* **Mark Tasks as Done/Undone** : `mark <INDEX> <done/undone>` <br>
+   e.g. `mark 2 done` `mark 5 undone`
 
-* **Mark Tasks as Done/Undone** : 'exit' <br>
-   e.g. `mark 2 done`
+* **Undo a command** : `undo` <br>
+   e.g. `undo`
+
+* **Redo a command** : `redo` <br>
+   e.g. `redo`
+   
+* **Exit** : `exit` <br>
+   e.g. `exit`
