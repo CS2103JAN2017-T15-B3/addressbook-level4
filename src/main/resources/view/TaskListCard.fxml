@@ -23,6 +23,18 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
             </columnConstraints>
             <children>
+            <HBox id="notificationContainer" alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="notificationIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="true">
+                     <image>
+                        <Image url="@../images/clock.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="4.0" top="4.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <VBox fx:id="idContainer" alignment="CENTER" minWidth="16.0">

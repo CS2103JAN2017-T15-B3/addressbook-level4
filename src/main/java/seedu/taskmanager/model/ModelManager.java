@@ -29,6 +29,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final String STRING_INITIAL = "Initial";
 
     private final TaskManager taskManager;
+    private final TaskNotifier taskNotifier;
     private final FilteredList<ReadOnlyTask> filteredTasks;
     private final TaskManagerStateManager stateManager;
 
@@ -41,6 +42,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
 
+        // @@author A0140538J
+        this.taskNotifier = new TaskNotifierManager(userPrefs);
+        // @@author
         this.taskManager = new TaskManager(taskManager);
         filteredTasks = new FilteredList<>(this.taskManager.getTaskList());
         TaskManagerState initState = new TaskManagerState(taskManager, STRING_INITIAL);
@@ -51,6 +55,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
+    }
+
+    // @@author A0140538J
+    @Override
+    public void setNotification(String duration) {
+        taskNotifier.setNotification(duration);
     }
 
     // @@author A0140417R

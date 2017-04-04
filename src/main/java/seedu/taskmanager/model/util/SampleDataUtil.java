@@ -37,20 +37,16 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         try {
             return new Task[] {
-                new Task(new Name(EVENT1_NAME),
-                            DateTimeUtil.parseStartDateTime(EVENT1_START_DATE_STRING),
-                            DateTimeUtil.parseEndDateTime(EVENT1_END_DATE_STRING),
-                            new UniqueTagList("important")),
-                new Task(new Name(DDL1_NAME), null,
-                            DateTimeUtil.parseEndDateTime(DDL1_DUE_TIME_STRING), new UniqueTagList()),
-                new Task(new Name(FLT1_NAME), new UniqueTagList()),
-                new Task(new Name(EVENT2_NAME),
-                            DateTimeUtil.parseStartDateTime(EVENT2_START_DATE_STRING),
+                    new Task(new Name(EVENT1_NAME), DateTimeUtil.parseStartDateTime(EVENT1_START_DATE_STRING),
+                            DateTimeUtil.parseEndDateTime(EVENT1_END_DATE_STRING), new UniqueTagList("important")),
+                    new Task(new Name(DDL1_NAME), null, DateTimeUtil.parseEndDateTime(DDL1_DUE_TIME_STRING),
+                            new UniqueTagList()),
+                    new Task(new Name(FLT1_NAME), new UniqueTagList()),
+                    new Task(new Name(EVENT2_NAME), DateTimeUtil.parseStartDateTime(EVENT2_START_DATE_STRING),
                             DateTimeUtil.parseEndDateTime(EVENT2_END_DATE_STRING), new UniqueTagList()),
-                new Task(new Name(DDL2_NAME), null,
-                            DateTimeUtil.parseEndDateTime(DDL2_DUE_TIME_STRING),
+                    new Task(new Name(DDL2_NAME), null, DateTimeUtil.parseEndDateTime(DDL2_DUE_TIME_STRING),
                             new UniqueTagList("urgent")),
-                new Task(new Name(FLT2_NAME), new UniqueTagList()) };
+                    new Task(new Name(FLT2_NAME), new UniqueTagList()) };
         } catch (IllegalValueException e) {
             throw new AssertionError("sample data cannot be invalid", e);
         }

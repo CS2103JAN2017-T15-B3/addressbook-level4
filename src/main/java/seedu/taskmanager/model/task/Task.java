@@ -1,10 +1,12 @@
 
 package seedu.taskmanager.model.task;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
 
 import seedu.taskmanager.commons.util.CollectionUtil;
+import seedu.taskmanager.commons.util.NotificationUtil;
 import seedu.taskmanager.model.tag.UniqueTagList;
 
 /**
@@ -17,6 +19,7 @@ public class Task implements ReadOnlyTask {
     private Optional<TaskDate> startDate, endDate;
     private UniqueTagList tags;
     private boolean isDoneStatus;
+    private boolean isDueSoonStatus;
 
     public Task(Name name, TaskDate startDate, TaskDate endDate, UniqueTagList tags, boolean status) {
         assert !CollectionUtil.isAnyNull(name, tags);
@@ -26,19 +29,23 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from
                                              // changes in the arg list
         this.isDoneStatus = status;
+        setDueSoonStatus();
     }
 
     // @@author A0140538J
     public Task(Name name, TaskDate startDate, TaskDate endDate, UniqueTagList tags) {
         this(name, startDate, endDate, tags, false);
+        setDueSoonStatus();
     }
 
     public Task(Name name, UniqueTagList tags) {
         this(name, null, null, tags, false);
+        setDueSoonStatus();
     }
 
     public Task(Name name, Optional<TaskDate> startDate, Optional<TaskDate> endDate, UniqueTagList tags) {
         this(name, startDate.orElse(null), endDate.orElse(null), tags, false);
+        setDueSoonStatus();
     }
 
     /**
@@ -46,6 +53,7 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getStartDate(), source.getEndDate(), source.getTags(), source.isDone());
+        setDueSoonStatus();
     }
 
     public void setName(Name name) {
@@ -168,6 +176,31 @@ public class Task implements ReadOnlyTask {
 
     public void setDoneStatus(boolean status) {
         this.isDoneStatus = status;
+    }
+
+    public void setDueSoonStatus() {
+        Date notificationDate = NotificationUtil.getNotificationDate();
+
+        if (this.hasStartDate()) {
+            if (getStartDate().getTaskDate().before(notificationDate)) {
+                this.isDueSoonStatus = true;
+                return;
+            }
+        }
+
+        if (this.hasEndDate()) {
+            if (getEndDate().getTaskDate().before(notificationDate)) {
+                this.isDueSoonStatus = true;
+                return;
+            }
+        }
+
+        this.isDueSoonStatus = false;
+    }
+
+    @Override
+    public boolean isDueSoon() {
+        return isDueSoonStatus;
     }
 
 }

@@ -21,6 +21,7 @@ import seedu.taskmanager.logic.commands.IncorrectCommand;
 import seedu.taskmanager.logic.commands.ListCommand;
 import seedu.taskmanager.logic.commands.MarkCommand;
 import seedu.taskmanager.logic.commands.RedoCommand;
+import seedu.taskmanager.logic.commands.SetNotificationCommand;
 import seedu.taskmanager.logic.commands.UndoCommand;
 
 /**
@@ -85,6 +86,9 @@ public class Parser {
 
         case MarkCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);
+
+        case SetNotificationCommand.COMMAND_WORD:
+            return new SetNotificationCommandParser().parse(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
