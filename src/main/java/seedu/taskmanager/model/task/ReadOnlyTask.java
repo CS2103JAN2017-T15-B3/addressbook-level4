@@ -41,17 +41,23 @@ public interface ReadOnlyTask {
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
     default boolean isSameStateAs(ReadOnlyTask other) {
+
+        boolean sameName = other.getName().equals(this.getName());
+        boolean sameStartDate = other.hasStartDate() && this.hasStartDate() ?
+                other.getStartDate().equals(this.getStartDate()) : false;
+        boolean sameEndDate = other.hasEndDate() && this.hasEndDate() ?
+                other.getEndDate().equals(this.getEndDate()) : false;
+        boolean sameTags = other.getTags().equals(this.getTags());
+        boolean sameDoneStatus = other.isDone() == this.isDone();
+
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                        && other.getName().equals(this.getName()) // state
-                                                                  // checks here
-                                                                  // onwards
-                );
+                        && sameName && sameStartDate && sameEndDate && sameTags && sameDoneStatus);
     }
 
     // @@author A0140538J
     /**
-     * Formats the task as text, showing all contact details.
+     * Formats the task as text, showing all tasks details.
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
