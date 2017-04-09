@@ -23,6 +23,7 @@ import com.google.common.eventbus.Subscribe;
 import seedu.taskmanager.commons.core.EventsCenter;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskmanager.commons.events.ui.JumpToListRequestEvent;
+import seedu.taskmanager.commons.events.ui.ShowHelpRequestEvent;
 import seedu.taskmanager.logic.commands.CommandResult;
 import seedu.taskmanager.logic.commands.HelpCommand;
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
@@ -55,12 +56,12 @@ public class LogicManagerTest {
     protected int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
-        latestSavedTaskManager = new TaskManager(abce.data);
+    private void handleLocalModelChangedEvent(TaskManagerChangedEvent tmce) {
+        latestSavedTaskManager = new TaskManager(tmce.data);
     }
 
     @Subscribe
-    private void handleShowHelpRequestEvent() {
+    private void handleShowHelpRequestEvent(ShowHelpRequestEvent she) {
         helpShown = true;
     }
 
