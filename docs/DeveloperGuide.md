@@ -177,7 +177,7 @@ _Figure 2.3.1 : Structure of the Logic Component_
 **`Logic` Interface**
 
 The `Logic` interface provides logic operations without exposing any implementation information of the `LogicManager` class.
-The method `execute(String commandText)` identifies the command input in the command text string and execute the command accordingly. Additionally, the method `getFilteredTaskList()` retrieves and returns the filtered task list from `model` component. 
+The method `execute(String commandText)` identifies the command input in the command text string and execute the command accordingly. Additionally, the method `getFilteredTaskList()` retrieves and returns the filtered task list from `model` component.
 
 **`LogicManager` Class**
 
@@ -264,7 +264,7 @@ Certain properties of the application can be controlled (e.g App name, logging l
 We used `Optional` attributes in our implementation of different type of tasks.
 * If a task is a floating task (no dates specified), both startDate and endDate will be empty.
 * If a task is a deadline, only endDate will be filled with a `TaskDate` object.
-* An event task will have both startDate and endDate filled. 
+* An event task will have both startDate and endDate filled.
 
 A seperate Utility class (TaskUtil) is defined in the commons class to identify whether a task is of different types. This is to adhere to the Single Responsibility Principle.
 
@@ -390,13 +390,13 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | search a task by name | find the corresponding tasks. For example, I may have forgotten the details of task whose name I remember
 `* * *` | user | change the save file directory | save in different files which is important security/memory allocation
 `* *` | user | exit the program | quit the task manager as may not need it all the time
-`* *` | user | clear all tasks | remove all tasks in one go if it is needed as removing them one by one may take significant time 
+`* *` | user | clear all tasks | remove all tasks in one go if it is needed as removing them one by one may take significant time
 `* *` | user | re-do the last undone command | undo my undo command as I may have made a mistake undoing the latest undo command
 `* *` | user | search an event task by name | find a particular event task only as deadline and floating tasks may not be required
 `* *` | user | search a deadline task by name | find a particular deadline task only as event and floating tasks may not be required
 `* *` | user | search a floating task by name | find a particular floating task only as deadline and event tasks may not be required
 `* *` | user | add a recurring event | avoid having to add the same task repetitively; with its parameters automatically updated
-`* *` | user | view all tasks today | quickly know my agenda for today in order to plan my day 
+`* *` | user | view all tasks today | quickly know my agenda for today in order to plan my day
 `*` | user | tag location to a task | know where the task is at if needed as I may need the task manager to remember this detail
 `*` | user | search by location | know which task/tasks is/are held at that location
 `*` | user | update location of a task | change the place in case the location of task changes

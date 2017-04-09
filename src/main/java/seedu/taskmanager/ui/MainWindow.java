@@ -37,9 +37,6 @@ public class MainWindow extends UiPart<Region> {
     private Config config;
 
     @FXML
-    private AnchorPane browserPlaceholder;
-
-    @FXML
     private AnchorPane commandBoxPlaceholder;
 
     @FXML
@@ -185,17 +182,12 @@ public class MainWindow extends UiPart<Region> {
      * Closes the application.
      */
     @FXML
-    private void handleExit() {
+    public void handleExit() {
         raise(new ExitAppRequestEvent());
     }
 
     public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
-
-    /*
-     * void loadTaskPage(ReadOnlyTask task) { browserPanel.loadTaskPage(task); } void releaseResources() {
-     * browserPanel.freeResources(); }
-     */
 
 }

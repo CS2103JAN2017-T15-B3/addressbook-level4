@@ -38,7 +38,6 @@ import seedu.taskmanager.model.task.Name;
 import seedu.taskmanager.model.task.ReadOnlyTask;
 import seedu.taskmanager.model.task.Task;
 import seedu.taskmanager.model.task.TaskDate;
-import seedu.taskmanager.storage.StorageManager;
 
 public class LogicManagerTest {
 
@@ -57,8 +56,8 @@ public class LogicManagerTest {
     protected int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
-        latestSavedTaskManager = new TaskManager(abce.data);
+    private void handleLocalModelChangedEvent(TaskManagerChangedEvent tmce) {
+        latestSavedTaskManager = new TaskManager(tmce.data);
     }
 
     @Subscribe
@@ -74,9 +73,7 @@ public class LogicManagerTest {
     @Before
     public void setUp() {
         model = new ModelManager();
-        String tempTaskManagerFile = saveFolder.getRoot().getPath() + "TempTaskManager.xml";
-        String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
-        logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
+        logic = new LogicManager(model);
         EventsCenter.getInstance().registerHandler(this);
 
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last

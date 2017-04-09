@@ -12,7 +12,6 @@ import seedu.taskmanager.logic.commands.exceptions.CommandException;
 import seedu.taskmanager.logic.parser.Parser;
 import seedu.taskmanager.model.Model;
 import seedu.taskmanager.model.task.ReadOnlyTask;
-import seedu.taskmanager.storage.Storage;
 
 /**
  * The main LogicManager of the app.
@@ -23,7 +22,7 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final Parser parser;
 
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model) {
         this.model = model;
         this.parser = new Parser();
     }
