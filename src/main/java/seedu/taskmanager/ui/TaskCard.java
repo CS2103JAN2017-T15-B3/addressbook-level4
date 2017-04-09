@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.taskmanager.model.task.ReadOnlyTask;
@@ -22,8 +21,6 @@ public class TaskCard extends UiPart<Region> {
     private VBox idContainer;
     @FXML
     private VBox labelContainer;
-    @FXML
-    private HBox cardPane;
     @FXML
     private Label name;
     @FXML

@@ -41,7 +41,7 @@ public class TaskListPanel extends UiPart<Region> {
     private void setUpListener() {
         taskListView.getItems().addListener(new ListChangeListener<ReadOnlyTask>() {
             @Override
-            public void onChanged(javafx.collections.ListChangeListener.Change<? extends ReadOnlyTask> c) {
+            public void onChanged(Change<? extends ReadOnlyTask> c) {
                 while (c.next()) {
                     if (c.wasAdded()) {
                         scrollTo(c.getFrom());

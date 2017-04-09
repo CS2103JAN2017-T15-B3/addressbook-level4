@@ -210,7 +210,7 @@ public class SampleDataUtil {
                         new UniqueTagList(), true, false),
                 new Task(new Name(FLT16_NAME), null, null, new UniqueTagList(), false, false),
                 new Task(new Name(EVENT17_NAME), DateTimeUtil.parseStartDateTime(EVENT17_START_DATE_STRING),
-                        DateTimeUtil.parseEndDateTime(EVENT3_END_DATE_STRING), new UniqueTagList(), false, false),
+                        DateTimeUtil.parseEndDateTime(EVENT17_END_DATE_STRING), new UniqueTagList(), false, false),
                 new Task(new Name(DDL17_NAME), null, DateTimeUtil.parseEndDateTime(DDL17_DUE_TIME_STRING),
                         new UniqueTagList(), false, false),
                 new Task(new Name(FLT17_NAME), null, null, new UniqueTagList(), false, false) };
