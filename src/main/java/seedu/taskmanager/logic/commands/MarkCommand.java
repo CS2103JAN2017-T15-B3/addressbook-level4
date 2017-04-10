@@ -1,6 +1,8 @@
 
 package seedu.taskmanager.logic.commands;
 
+import static org.junit.Assert.assertNotNull;
+
 import static seedu.taskmanager.commons.util.CommonStringUtil.DONE_STRING;
 import static seedu.taskmanager.commons.util.CommonStringUtil.UNDONE_STRING;
 
@@ -35,7 +37,7 @@ public class MarkCommand extends Command {
 
     public MarkCommand(int targetIndex, String newMarkStatus) {
         assert targetIndex > 0;
-        assert newMarkStatus != null;
+        assertNotNull(newMarkStatus);
 
         this.targetIndex = targetIndex - 1;
         this.newMarkStatus = newMarkStatus;

@@ -50,9 +50,8 @@ public class AddCommandTest extends TaskManagerGuiTest {
 
         // add conflicting event which is in conflict with event1
         commandBox.runCommand(td.eventConflicting.getAddCommand());
-        String expectedResultMessage = AddCommand.MESSAGE_SUCCESS + NEW_LINE_STRING
-                + AddCommand.MESSAGE_CONFLICT + NEW_LINE_STRING + td.event1.getAsText()
-                + NEW_LINE_STRING;
+        String expectedResultMessage = AddCommand.MESSAGE_SUCCESS + NEW_LINE_STRING + AddCommand.MESSAGE_CONFLICT
+                + NEW_LINE_STRING + td.event1.getAsText() + NEW_LINE_STRING;
         assertResultMessage(expectedResultMessage);
 
         // invalid command

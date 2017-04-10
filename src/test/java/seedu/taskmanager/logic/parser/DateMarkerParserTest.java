@@ -70,7 +70,8 @@ public class DateMarkerParserTest {
         }
     }
 
-    @Test(expected = IllegalValueException.class)
+    @Test(
+            expected = IllegalValueException.class)
     public void testFormat_containsRepeatedPrefix_assertException() throws IllegalValueException {
         String test = "apples to today by tomorrow";
         DateMarkerParser.replaceMarkersWithPrefix(test);

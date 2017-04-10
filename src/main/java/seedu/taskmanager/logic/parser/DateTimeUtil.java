@@ -2,6 +2,8 @@
 
 package seedu.taskmanager.logic.parser;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -49,6 +51,7 @@ public class DateTimeUtil {
 
     // General date/time parses for string with both date and time elements
     public static TaskDate parseDateTime(String date) throws IllegalValueException {
+        assertNotNull(date);
         List<DateGroup> parsedDates = dateTimeParser.parse(date);
 
         if (isValidArg(parsedDates)) {
@@ -63,6 +66,7 @@ public class DateTimeUtil {
     // Set time of the returned date object as the starting time of the day
     // i.e. 00:00:00
     public static TaskDate parseStartDateTime(String startDate) throws IllegalValueException {
+        assertNotNull(startDate);
         List<DateGroup> parsedStartDatesList = dateTimeParser.parse(startDate);
 
         if (isValidArg(parsedStartDatesList)) {
@@ -83,6 +87,7 @@ public class DateTimeUtil {
     // Set time of the returned date object as the ending time of the day
     // i.e. 23:59:59
     public static TaskDate parseEndDateTime(String endDate) throws IllegalValueException {
+        assertNotNull(endDate);
         List<DateGroup> parsedEndDatesList = dateTimeParser.parse(endDate);
 
         if (isValidArg(parsedEndDatesList)) {
@@ -102,6 +107,7 @@ public class DateTimeUtil {
     // toString method for date objects
     // @returns both date element and time element
     public static String getStringFromDate(Date date) {
+        assertNotNull(date);
         DateFormat dateFormat = new SimpleDateFormat(DATE_STRING_FORMAT);
         return dateFormat.format(date);
     }
@@ -109,6 +115,7 @@ public class DateTimeUtil {
     // toString method for date objects
     // @return only returns only date element without time element
     public static String getOnlyDateStringFromDate(Date date) {
+        assertNotNull(date);
         DateFormat onlyDateFormat = new SimpleDateFormat(ONLY_DATE_STRING_FORMAT);
         return onlyDateFormat.format(date);
     }
@@ -123,6 +130,7 @@ public class DateTimeUtil {
 
     // Check if explicit time or relative time is present in a given date/time string
     public static boolean isTimePresent(String date) {
+        assertNotNull(date);
         List<DateGroup> parsedDatesList = dateTimeParser.parse(date);
         assert isValidArg(parsedDatesList);
         DateGroup parsedDate = parsedDatesList.get(FIRST_ELEMENT_INDEX);
@@ -133,11 +141,11 @@ public class DateTimeUtil {
 
     /**
      * Checks if a particular string is a valid time format
-     *
      * @param date
      * @return true if string is parseable to date, false otherwise
      */
     public static boolean isValidDateString(String args) {
+        assertNotNull(args);
         List<DateGroup> parsedString = dateTimeParser.parse(args);
         return isValidArg(parsedString);
     }
@@ -145,12 +153,14 @@ public class DateTimeUtil {
     // Set time of the returned Date object as the starting time of the day
     // i.e. 00:00:00
     private static Date setStartDateTime(Date date) {
+        assertNotNull(date);
         return setPredefinedTime(date, STARTING_TIME_HOUR, STARTING_TIME_MINUTE, STARTING_TIME_SECOND);
     }
 
     // Set time of the returned Date object as the ending time of the day
     // i.e. 23:59:59
     private static Date setEndDateTime(Date date) {
+        assertNotNull(date);
         return setPredefinedTime(date, ENDING_TIME_HOUR, ENDING_TIME_MINUTE, ENDING_TIME_SECOND);
     }
 

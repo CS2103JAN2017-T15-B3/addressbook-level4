@@ -15,7 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_STARTDATE = new Prefix("s/");
     public static final Prefix PREFIX_ENDDATE = new Prefix("e/");
-    public static final Prefix PREFIX_DEADLINE = new Prefix("b/");
 
     /* Accepted words for date and time */
     public static final String[] ACCEPTED_START_DATE_MARKER = {

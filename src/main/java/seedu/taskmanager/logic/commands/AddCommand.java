@@ -1,6 +1,8 @@
 
 package seedu.taskmanager.logic.commands;
 
+import static org.junit.Assert.assertNotNull;
+
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_DUPLICATE_TASK;
 import static seedu.taskmanager.commons.util.CommonStringUtil.EMPTY_STRING;
 import static seedu.taskmanager.commons.util.CommonStringUtil.NEW_LINE_STRING;
@@ -70,6 +72,7 @@ public class AddCommand extends Command {
     // Check with all existing tasks for conflicts
     // @Returns a string with all conflicting tasks
     public String allConflictingTasks(Task toAdd) {
+        assertNotNull(toAdd);
         StringBuilder conflictingTasksStringBuilder = new StringBuilder(EMPTY_STRING);
 
         for (ReadOnlyTask task : model.getTaskManager().getTaskList()) {
@@ -83,7 +86,7 @@ public class AddCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        assert model != null;
+        assertNotNull(model);
         try {
             if (allConflictingTasks(toAdd).isEmpty()) {
                 model.addTask(toAdd);

@@ -1,6 +1,8 @@
 
 package seedu.taskmanager.logic.commands;
 
+import static org.junit.Assert.assertNotNull;
+
 import seedu.taskmanager.model.TaskManager;
 
 /**
@@ -13,7 +15,7 @@ public class ClearCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        assert model != null;
+        assertNotNull(model);
         model.resetData(new TaskManager());
         return new CommandResult(MESSAGE_SUCCESS);
     }

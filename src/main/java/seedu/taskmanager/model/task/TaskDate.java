@@ -2,6 +2,8 @@
 
 package seedu.taskmanager.model.task;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.Date;
 
 import seedu.taskmanager.logic.parser.DateTimeUtil;
@@ -16,7 +18,7 @@ public class TaskDate {
     private final boolean hasTime;
 
     public TaskDate(Date date, boolean hasTime) {
-        assert date != null;
+        assertNotNull(date);
         this.taskDate = date;
         this.hasTime = hasTime;
     }

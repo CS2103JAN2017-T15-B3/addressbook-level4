@@ -45,9 +45,8 @@ public class ListCommandParser {
     }
 
     /**
-     * Formats a String of arguments into two different filters.
-     * First filter is the taskType string , second filter is the date string.
-     * Stores it in an array to be sent for filtering.
+     * Formats a String of arguments into two different filters. First filter is the taskType string , second filter is
+     * the date string. Stores it in an array to be sent for filtering.
      */
     private String[] formatArgs(String twoArgs, String taskType) {
         String[] formattedArgs = new String[2];

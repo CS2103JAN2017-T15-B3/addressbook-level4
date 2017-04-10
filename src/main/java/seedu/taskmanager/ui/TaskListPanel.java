@@ -3,8 +3,9 @@ package seedu.taskmanager.ui;
 
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.application.Platform;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -13,6 +14,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.taskmanager.commons.core.LogsCenter;
+import seedu.taskmanager.commons.events.model.TaskUpdatedEvent;
 import seedu.taskmanager.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.taskmanager.commons.util.FxViewUtil;
 import seedu.taskmanager.model.task.ReadOnlyTask;
@@ -31,26 +33,8 @@ public class TaskListPanel extends UiPart<Region> {
         super(FXML);
         setConnections(taskList);
         addToPlaceholder(taskListPlaceholder);
-        setUpListener();
+        registerAsAnEventHandler(this);
     }
-
-    // @@author A0140417R
-    /**
-     * This method sets up a changeListener, and auto-scrolls the ListView to the added/updated item when required.
-     */
-    private void setUpListener() {
-        taskListView.getItems().addListener(new ListChangeListener<ReadOnlyTask>() {
-            @Override
-            public void onChanged(javafx.collections.ListChangeListener.Change<? extends ReadOnlyTask> c) {
-                while (c.next()) {
-                    if (c.wasAdded()) {
-                        scrollTo(c.getFrom());
-                    }
-                }
-            }
-        });
-    }
-    // @@author
 
     private void setConnections(ObservableList<ReadOnlyTask> taskList) {
         taskListView.setItems(taskList);
@@ -78,6 +62,17 @@ public class TaskListPanel extends UiPart<Region> {
             taskListView.scrollTo(index);
             taskListView.getSelectionModel().clearAndSelect(index);
         });
+    }
+
+    /**
+     * Detects changes in task list and scrolls to that index.
+     * @param TaskUpdatedEvent
+     */
+    @Subscribe
+    public void handleUpdatedEvent(TaskUpdatedEvent abce) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Updated task found. " + abce.toString()));
+        int updatedIndex = abce.updatedIndex;
+        scrollTo(updatedIndex);
     }
 
     class TaskListViewCell extends ListCell<ReadOnlyTask> {

@@ -1,6 +1,8 @@
 
 package seedu.taskmanager.logic.parser;
 
+import static org.junit.Assert.assertNotNull;
+
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskmanager.commons.util.CommonStringUtil.EMPTY_STRING;
 
@@ -24,7 +26,7 @@ public class SetNotificationCommandParser {
      */
     public Command parse(String arg) {
 
-        assert arg != null;
+        assertNotNull(arg);
 
         String modifiedArg = arg.trim();
 

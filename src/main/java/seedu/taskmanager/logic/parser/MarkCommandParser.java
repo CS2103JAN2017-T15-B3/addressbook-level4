@@ -1,6 +1,8 @@
 
 package seedu.taskmanager.logic.parser;
 
+import static org.junit.Assert.assertNotNull;
+
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskmanager.commons.util.CommonStringUtil.DONE_STRING;
 import static seedu.taskmanager.commons.util.CommonStringUtil.UNDONE_STRING;
@@ -23,8 +25,8 @@ public class MarkCommandParser {
      * for execution.
      */
     public Command parse(String args) {
+        assertNotNull(args);
 
-        assert args != null;
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer();
         argsTokenizer.tokenize(args);
 

@@ -16,6 +16,7 @@ import seedu.taskmanager.commons.core.LogsCenter;
 import seedu.taskmanager.commons.core.UnmodifiableObservableList;
 import seedu.taskmanager.commons.events.model.FilePathChangedEvent;
 import seedu.taskmanager.commons.events.model.TaskManagerChangedEvent;
+import seedu.taskmanager.commons.events.model.TaskUpdatedEvent;
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 import seedu.taskmanager.commons.util.CollectionUtil;
 import seedu.taskmanager.commons.util.StringUtil;
@@ -79,6 +80,13 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
+    // @@author A0140417R
+    /** Raises an event to indicate a task is updated */
+    private void indicateTaskChanged(int index) {
+        raise(new TaskUpdatedEvent(index));
+    }
+    // @@author
+
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
@@ -90,6 +98,8 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        int lastIndex = filteredTasks.size() - 1;
+        indicateTaskChanged(lastIndex);
     }
 
     @Override
@@ -99,7 +109,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         int taskManagerIndex = filteredTasks.getSourceIndex(filteredTaskListIndex);
         taskManager.updateTask(taskManagerIndex, editedTask);
+        updateFilteredListToShowAll();
         indicateTaskManagerChanged();
+        indicateTaskChanged(taskManagerIndex);
     }
 
     // @@author A0140417R

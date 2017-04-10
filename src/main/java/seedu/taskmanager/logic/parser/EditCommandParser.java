@@ -1,6 +1,8 @@
 
 package seedu.taskmanager.logic.parser;
 
+import static org.junit.Assert.assertNotNull;
+
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskmanager.commons.util.CommonStringUtil.REMOVE_STRING;
 import static seedu.taskmanager.logic.parser.CliSyntax.PREFIX_ENDDATE;
@@ -30,8 +32,8 @@ public class EditCommandParser {
      * for execution.
      */
     public Command parse(String args) {
+        assertNotNull(args);
 
-        assert args != null;
         ArgumentTokenizer argsTokenizer = new ArgumentTokenizer(PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_TAG);
         Optional<Integer> index;
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
@@ -92,7 +94,7 @@ public class EditCommandParser {
      * {@code Optional<UniqueTagList>} containing zero tags.
      */
     private Optional<UniqueTagList> parseTagsForEdit(Collection<String> tags) throws IllegalValueException {
-        assert tags != null;
+        assertNotNull(tags);
 
         if (tags.isEmpty()) {
             return Optional.empty();

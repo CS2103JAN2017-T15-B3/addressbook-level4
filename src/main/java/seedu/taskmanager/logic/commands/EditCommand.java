@@ -1,6 +1,8 @@
 
 package seedu.taskmanager.logic.commands;
 
+import static org.junit.Assert.assertNotNull;
+
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_DUPLICATE_TASK;
 import static seedu.taskmanager.commons.core.Messages.MESSAGE_START_AFTER_END;
 
@@ -25,29 +27,29 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
-            + "by the index number as shown in the list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) [NAME] [s/START_DATE] [e/END_DATE] [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + ": Edits the details of the task identified " + "by the index number as shown in the list. "
+                    + "Existing values will be overwritten by the input values.\n"
+                    + "Parameters: INDEX (must be a positive integer) [NAME] [s/START_DATE] [e/END_DATE] [t/TAG]...\n"
+                    + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Edited %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_INVALID_EDITTED_TASK = "The editted task is not in the right format."
-            + " Please check the type of your task to edit accordingly.";
+    public static final String MESSAGE_INVALID_EDITTED_TASK =
+            "The editted task is not in the right format." + " Please check the type of your task to edit accordingly.";
 
     private final int filteredTaskListIndex;
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
      * @param filteredTaskListIndex
-     *            the index of the task in the filtered task list to edit
+     *        the index of the task in the filtered task list to edit
      * @param editTaskDescriptor
-     *            details to edit the task with
+     *        details to edit the task with
      */
     public EditCommand(int filteredTaskListIndex, EditTaskDescriptor editTaskDescriptor) {
         assert filteredTaskListIndex > 0;
-        assert editTaskDescriptor != null;
+        assertNotNull(editTaskDescriptor);
 
         // converts filteredTaskListIndex from one-based to zero-based.
         this.filteredTaskListIndex = filteredTaskListIndex - 1;
@@ -57,6 +59,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
+        assertNotNull(model);
         List<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
         if (filteredTaskListIndex >= lastShownList.size()) {
@@ -85,7 +88,7 @@ public class EditCommand extends Command {
      */
     private static Task createEditedTask(ReadOnlyTask taskToEdit, EditTaskDescriptor editTaskDescriptor)
             throws IllegalValueException {
-        assert taskToEdit != null;
+        assertNotNull(taskToEdit);
 
         Name updatedName = editTaskDescriptor.getName().orElseGet(taskToEdit::getName);
         UniqueTagList updatedTags = editTaskDescriptor.getTags().orElseGet(taskToEdit::getTags);
@@ -154,7 +157,7 @@ public class EditCommand extends Command {
         }
 
         public void setName(Optional<Name> name) {
-            assert name != null;
+            assertNotNull(name);
             this.name = name;
         }
 
@@ -163,7 +166,7 @@ public class EditCommand extends Command {
         }
 
         public void setStartDate(Optional<TaskDate> taskDate) {
-            assert taskDate != null;
+            assertNotNull(taskDate);
             this.startDate = taskDate;
         }
 
@@ -184,7 +187,7 @@ public class EditCommand extends Command {
         }
 
         public void setEndDate(Optional<TaskDate> taskDate) {
-            assert taskDate != null;
+            assertNotNull(taskDate);
             this.endDate = taskDate;
         }
 
@@ -197,7 +200,7 @@ public class EditCommand extends Command {
         }
 
         public void setTags(Optional<UniqueTagList> tags) {
-            assert tags != null;
+            assertNotNull(tags);
             this.tags = tags;
         }
 

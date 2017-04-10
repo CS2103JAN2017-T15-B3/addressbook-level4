@@ -19,7 +19,6 @@ public class CommandBoxTest extends TaskManagerGuiTest {
 
     private static final String FIRST_INDEXT_COMMAND_STRING = "";
 
-
     private ArrayList<String> defaultStyleOfCommandBox;
     private ArrayList<String> errorStyleOfCommandBox;
 

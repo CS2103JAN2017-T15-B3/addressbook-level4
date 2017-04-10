@@ -1,6 +1,8 @@
 
 package seedu.taskmanager.logic.commands;
 
+import static org.junit.Assert.assertNotNull;
+
 import static seedu.taskmanager.commons.util.CommonStringUtil.EMPTY_STRING;
 
 // @@author A0140538J
@@ -32,7 +34,7 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        assert model != null;
+        assertNotNull(model);
 
         if (filter != null) {
             if (filter.equals(EMPTY_STRING)) {

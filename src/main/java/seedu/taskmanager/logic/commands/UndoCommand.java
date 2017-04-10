@@ -1,6 +1,8 @@
 
 package seedu.taskmanager.logic.commands;
 
+import static org.junit.Assert.assertNotNull;
+
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 
 // @@author A0140417R
@@ -16,7 +18,7 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        assert model != null;
+        assertNotNull(model);
         try {
             model.loadPreviousState();
         } catch (IndexOutOfBoundsException e) {

@@ -1,6 +1,8 @@
 
 package seedu.taskmanager.model.task;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
@@ -187,7 +189,7 @@ public class Task implements ReadOnlyTask {
      * Updates this task with the details of {@code replacement}.
      */
     public void resetData(ReadOnlyTask replacement) {
-        assert replacement != null;
+        assertNotNull(replacement);
 
         this.setName(replacement.getName());
         this.setStartDate(replacement.getStartDate());

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 import seedu.taskmanager.commons.exceptions.IllegalValueException;
 
-
 // @@author A0140538J
 /**
  * A util for parsing of list command arguments. Contains the accepted arguments following a list command.

@@ -1,9 +1,15 @@
 
 package seedu.taskmanager.logic.commands;
 
+import static org.junit.Assert.assertNotNull;
+
 import seedu.taskmanager.logic.commands.exceptions.CommandException;
 
 // @@author A0140417R
+/**
+ * Re-do command that only can be performed after an undo command.
+ * @author zeticous
+ */
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
@@ -14,7 +20,7 @@ public class RedoCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        assert model != null;
+        assertNotNull(model);
         try {
             model.loadNextState();
         } catch (IndexOutOfBoundsException e) {

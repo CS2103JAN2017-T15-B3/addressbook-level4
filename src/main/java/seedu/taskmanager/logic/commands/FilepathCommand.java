@@ -1,6 +1,8 @@
 
 package seedu.taskmanager.logic.commands;
 
+import static org.junit.Assert.assertNotNull;
+
 // @@author A0140417R
 /**
  * Changes the file path to the indicated directory
@@ -17,8 +19,8 @@ public class FilepathCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        assert model != null;
-        assert filePath != null;
+        assertNotNull(filePath);
+        assertNotNull(model);
 
         model.changeFilePath(filePath);
         return new CommandResult(String.format(MESSAGE_SUCCESS, filePath));

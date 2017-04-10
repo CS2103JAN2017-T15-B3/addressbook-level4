@@ -82,8 +82,7 @@ public class XmlAdaptedTask {
         final Name name = new Name(this.name);
         final TaskDate startDate =
                 this.startDate.equals(NO_DATE) ? null : DateTimeUtil.parseStartDateTime(this.startDate);
-        final TaskDate endDate =
-                this.endDate.equals(NO_DATE) ? null : DateTimeUtil.parseEndDateTime(this.endDate);
+        final TaskDate endDate = this.endDate.equals(NO_DATE) ? null : DateTimeUtil.parseEndDateTime(this.endDate);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         final boolean isDoneStatus = this.isDoneStatus;
         return new Task(name, startDate, endDate, tags, isDoneStatus);
